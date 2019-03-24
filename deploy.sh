@@ -172,3 +172,5 @@ deploy() {
 
   printf "${GREEN}Deploy successful! ${RESET}\n"
 }
+
+deploy "${@}"
