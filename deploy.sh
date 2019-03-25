@@ -159,14 +159,20 @@ clean() {
 }
 
 deploy() {
-  if [[ "${#}" -lt 2 ]]; then
-    printf "${RED}Usage: deploy [PROJECT_NAME] [SHA1] [DOCKER-COMPOSE-FILE]${RESET}\n"
+  if [[ "${#}" -lt 1 ]]; then
+    printf "${RED}Usage: deploy [PROJECT_NAME] [SHA1] [DOCKER-COMPOSE-FILE]\n"
+    printf "  where\n"
+    printf "    - PROJECT_NAME         Name of your compose project\n"
+    printf "    - SHA1                 Unique identifier of your project (default: git sha1 of commit)\n"
+    printf "    - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yml in current dir)\n"
+    printf "${RESET}"
+
     return 1
   fi
 
   local PROJECT_NAME="${1}"
-  local PROJECT_SHA1="${PROJECT_NAME}${2}"
-  local COMPOSE_FILE="${3:-$(pwd)/docker-compose.yml}"
+  local PROJECT_SHA1="${PROJECT_NAME}${2:-$(git rev-parse --short HEAD)}"
+  local COMPOSE_FILE="${3:-docker-compose.yml}"
 
   start_services "${PROJECT_SHA1}" "${PROJECT_NAME}" "${COMPOSE_FILE}"
 

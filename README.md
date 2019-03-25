@@ -7,5 +7,5 @@ Zero-downtime docker-compose deploy
 curl -O https://raw.githubusercontent.com/ViBiOh/docker-compose-deploy/master/deploy.sh
 chmod +x deploy.sh
 
-./deploy.sh awesome_project $(git rev-parse --short HEAD) path_to_your_compose_default_pwd
+./deploy.sh awesome_project sha1_default_to_git_sha path_to_your_compose_default_pwd
 ```
