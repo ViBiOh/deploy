@@ -150,6 +150,14 @@ rename_new_services() {
   done
 }
 
+clean() {
+  printf "${BLUE}Cleaning docker system${RESET}\n"
+
+  set +e
+  docker system prune -f
+  set -e
+}
+
 deploy() {
   if [[ "${#}" -lt 2 ]]; then
     printf "${RED}Usage: deploy [PROJECT_NAME] [SHA1] [DOCKER-COMPOSE-FILE]${RESET}\n"
@@ -171,6 +179,8 @@ deploy() {
   rename_new_services "${PROJECT_SHA1}" "${PROJECT_NAME}" "${COMPOSE_FILE}"
 
   printf "${GREEN}Deploy successful! ${RESET}\n"
+
+  clean
 }
 
 deploy "${@}"
