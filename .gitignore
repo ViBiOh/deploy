@@ -1,0 +1,7 @@
+# Golang
+vendor/
+bin/
+
+# Golang coverage
+coverage.txt
+profile.out

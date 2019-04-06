@@ -1,0 +1,45 @@
+jobs:
+  include:
+  - stage: Build
+
+    sudo: required
+    services:
+    - docker
+    script: docker build -t vibioh/$(make name):$(make version) .
+    after_success: |
+      echo ${DOCKER_PASS} | docker login -u vibioh --password-stdin
+      docker push vibioh/$(make name):$(make version)
+
+  - stage: Publish
+
+    sudo: required
+    services:
+    - docker
+    script: |
+      echo ${DOCKER_PASS} | docker login -u vibioh --password-stdin
+      docker pull vibioh/$(make name):$(make version)
+      docker tag vibioh/$(make name):$(make version) vibioh/$(make name):latest
+      docker push vibioh/$(make name):latest
+    after_success: |
+      curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy
+
+  - stage: Deploy
+
+    script: |
+      sed \
+        -e "s|\${BASIC_USERS}|${BASIC_USERS}|g" \
+        docker-compose.yml > docker-compose-env.yml
+    deploy:
+      provider: script
+      skip_cleanup: true
+      script: 'curl -H "Authorization: GitHub ${GITHUB_OAUTH_TOKEN}" -X POST "https://dashboard-api.vibioh.fr/deploy/iot/" --data-binary @docker-compose-env.yml'
+
+stages:
+  - Build
+  - name: Publish
+    if: branch = master
+  - name: Deploy
+    if: branch = master
+
+notifications:
+  email: false

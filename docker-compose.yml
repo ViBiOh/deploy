@@ -1,0 +1,35 @@
+version: '2'
+
+services:
+  site:
+    image: vibioh/deploy
+    command:
+    - -tracingAgent
+    - monitoring_jaeger:6831
+    - -tracingName
+    - deploy
+    labels:
+      traefik.frontend.passHostHeader: 'true'
+      traefik.frontend.rule: 'Host: deploy.vibioh.fr'
+      traefik.protocol: 'https'
+      traefik.port: '1080'
+      traefik.frontend.rateLimit.extractorFunc: 'client.ip'
+      traefik.frontend.rateLimit.rateSet.first.period: '60s'
+      traefik.frontend.rateLimit.rateSet.first.average: '100'
+      traefik.frontend.rateLimit.rateSet.first.burst: '200'
+      traefik.frontend.auth.basic.users: '${BASIC_USERS}'
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+    restart: on-failure:5
+    read_only: true
+    cpu_shares: 128
+    mem_limit: 25165824
+    security_opt:
+    - no-new-privileges
+
+networks:
+  default:
+    external:
+      name: traefik
