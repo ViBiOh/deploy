@@ -7,7 +7,7 @@ jobs:
     - docker
     script: docker build -t vibioh/$(make name):$(make version) .
     after_success: |
-      echo ${DOCKER_PASS} | docker login -u vibioh --password-stdin
+      echo "${DOCKER_PASS}" | docker login -u vibioh --password-stdin
       docker push vibioh/$(make name):$(make version)
 
   - stage: Publish
@@ -16,7 +16,7 @@ jobs:
     services:
     - docker
     script: |
-      echo ${DOCKER_PASS} | docker login -u vibioh --password-stdin
+      echo "${DOCKER_PASS}" | docker login -u vibioh --password-stdin
       docker pull vibioh/$(make name):$(make version)
       docker tag vibioh/$(make name):$(make version) vibioh/$(make name):latest
       docker push vibioh/$(make name):latest
@@ -32,7 +32,7 @@ jobs:
     deploy:
       provider: script
       skip_cleanup: true
-      script: 'curl -H "Authorization: GitHub ${GITHUB_OAUTH_TOKEN}" -X POST "https://dashboard-api.vibioh.fr/deploy/iot/" --data-binary @docker-compose-env.yml'
+      script: 'curl -H "Authorization: GitHub ${GITHUB_OAUTH_TOKEN}" -X POST "https://dashboard-api.vibioh.fr/deploy/deploy/" --data-binary @docker-compose-env.yml'
 
 stages:
   - Build
