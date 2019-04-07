@@ -82,6 +82,8 @@ func (a App) Handler() http.Handler {
 			w.WriteHeader(http.StatusInternalServerError)
 		}
 
-		w.Write(out.Bytes())
+		if _, err := w.Write(out.Bytes()); err != nil {
+			httperror.InternalServerError(w, err)
+		}
 	})
 }

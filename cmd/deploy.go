@@ -4,7 +4,7 @@ import (
 	"flag"
 	"os"
 
-	"github.com/ViBiOh/docker-compose-deploy/pkg/api"
+	"github.com/ViBiOh/deploy/pkg/api"
 	httputils "github.com/ViBiOh/httputils/pkg"
 	"github.com/ViBiOh/httputils/pkg/alcotest"
 	"github.com/ViBiOh/httputils/pkg/gzip"
