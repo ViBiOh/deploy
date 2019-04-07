@@ -60,7 +60,7 @@ are_services_healthy() {
   timeout=$(date --date="${WAIT_TIMEOUT} seconds" +%s)
 
   local healthcheckCount=$(count_services_with_health "${PROJECT_SHA1}" "${COMPOSE_FILE}")
-  local healthyCount=$(docker events --until "${timeout}" -f event="health_status: healthy" -f name="${PROJECT_SHA1}" | wc -l)
+  local healthyCount=$(docker events --until "${timeout}" -f event="health_status: healthy" -f name="^${PROJECT_SHA1}" | wc -l)
 
   [[ "${healthcheckCount}" == "${healthyCount}" ]] && echo "true" || echo "false"
 }
@@ -104,7 +104,7 @@ remove_old_services() {
 
   printf "${BLUE}Removing old containers from ${PROJECT_NAME}${RESET}\n"
 
-  local projectServices=($(docker ps -f name="${PROJECT_NAME}*" -q))
+  local projectServices=($(docker ps -f name="^${PROJECT_NAME}*" -q))
   local composeServices=($(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q))
 
   local containersToRemove=()
