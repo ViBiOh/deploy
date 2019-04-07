@@ -27,7 +27,7 @@ services:
     restart: on-failure:5
     cpu_shares: 128
     mem_limit: 134217728
-    user: 0
+    user: '0'
     security_opt:
     - no-new-privileges
 
