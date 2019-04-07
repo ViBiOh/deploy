@@ -1,6 +1,7 @@
 package api
 
 import (
+	"bytes"
 	"errors"
 	"flag"
 	"fmt"
@@ -72,11 +73,15 @@ func (a App) Handler() http.Handler {
 		}
 
 		cmd := exec.Command("./deploy.sh", projectName, versionSha1, composeFilename)
-		cmd.Stdout = w
-		cmd.Stderr = w
+
+		var out bytes.Buffer
+		cmd.Stdout = &out
+		cmd.Stderr = &out
 
 		if err := cmd.Run(); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 		}
+
+		w.Write(out.Bytes())
 	})
 }

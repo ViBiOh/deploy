@@ -15,7 +15,7 @@ FROM docker/compose:1.24.0
 ENV APP_NAME deploy
 EXPOSE 1080
 
-RUN apk --update add bash \
+RUN apk --update add bash coreutils \
  && rm -rf /var/cache/apk/*
 
 HEALTHCHECK --retries=10 CMD [ "/deploy", "-url", "https://localhost:1080/health" ]
