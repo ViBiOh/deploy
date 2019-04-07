@@ -1,7 +1,7 @@
 version: '2'
 
 services:
-  site:
+  api:
     image: vibioh/deploy
     command:
     - -tracingAgent
@@ -28,6 +28,31 @@ services:
     cpu_shares: 128
     mem_limit: 134217728
     user: 0
+    security_opt:
+    - no-new-privileges
+
+  portainer:
+    image: portainer/portainer
+    labels:
+      traefik.frontend.passHostHeader: 'true'
+      traefik.frontend.rule: 'Host: docker.vibioh.fr'
+      traefik.protocol: 'https'
+      traefik.port: '9000'
+      traefik.frontend.rateLimit.extractorFunc: 'client.ip'
+      traefik.frontend.rateLimit.rateSet.first.period: '60s'
+      traefik.frontend.rateLimit.rateSet.first.average: '100'
+      traefik.frontend.rateLimit.rateSet.first.burst: '200'
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock:ro
+    - portainer_data:/data
+    logging:
+      driver: json-file
+      options:
+        max-size: '10m'
+    restart: on-failure:5
+    cpu_shares: 128
+    mem_limit: 134217728
+    read_only: true
     security_opt:
     - no-new-privileges
 

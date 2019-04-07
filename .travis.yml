@@ -1,7 +1,6 @@
 jobs:
   include:
   - stage: Build
-
     sudo: required
     services:
     - docker
@@ -9,9 +8,7 @@ jobs:
     after_success: |
       echo "${DOCKER_PASS}" | docker login -u vibioh --password-stdin
       docker push vibioh/$(make name):$(make version)
-
   - stage: Publish
-
     sudo: required
     services:
     - docker
@@ -20,26 +17,27 @@ jobs:
       docker pull vibioh/$(make name):$(make version)
       docker tag vibioh/$(make name):$(make version) vibioh/$(make name):latest
       docker push vibioh/$(make name):latest
-    after_success: |
-      curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy
+    after_success: 'curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy'
 
   - stage: Deploy
-
-    script: |
-      sed \
-        -e "s|\${BASIC_USERS}|${BASIC_USERS}|g" \
-        docker-compose.yml > docker-compose-env.yml
+    script: skip
+    before_install:
+    - openssl aes-256-cbc -K $encrypted_4c6d491c783f_key -iv $encrypted_4c6d491c783f_iv -in deploy_key.enc -out deploy_key -d
+    before_deploy:
+    - eval "$(ssh-agent -s)"
+    - chmod 600 ${TRAVIS_BUILD_DIR}/deploy_key
+    - ssh-add ${TRAVIS_BUILD_DIR}/deploy_key
     deploy:
       provider: script
       skip_cleanup: true
-      script: 'curl -H "Authorization: GitHub ${GITHUB_OAUTH_TOKEN}" -X POST "https://dashboard-api.vibioh.fr/deploy/deploy/" --data-binary @docker-compose-env.yml'
+      script: ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS=${BASIC_USERS}
+        bash -s" -- < ./deploy.sh $(make name) $(make version)
 
 stages:
-  - Build
-  - name: Publish
-    if: branch = master
-  - name: Deploy
-    if: branch = master
-
+- Build
+- name: Publish
+  if: branch = master
+- name: Deploy
+  if: branch = master
 notifications:
   email: false

@@ -44,3 +44,9 @@ Usage of deploy:
   -userAgent string
         [health] User-Agent for check (default "Golang alcotest")
 ```
+
+## Portainer
+
+```bash
+docker volume create portainer_data
+```
