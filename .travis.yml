@@ -30,7 +30,7 @@ jobs:
     deploy:
       provider: script
       skip_cleanup: true
-      script: ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS=${BASIC_USERS}
+      script: scp -o StrictHostKeyChecking=no docker-compose.yml "${SSH_USER}@${SSH_HOST}:~/docker-compose.yml" && ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS=${BASIC_USERS}
         bash -s" -- < ./deploy.sh $(make name) $(make version)
 
 stages:
