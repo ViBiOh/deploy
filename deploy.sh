@@ -143,8 +143,10 @@ rename_new_services() {
   printf "${BLUE}Renaming containers from ${PROJECT_SHA1} to ${PROJECT_NAME}${RESET}\n\n"
 
   for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps --services); do
-    local containerID=$(docker ps -q --filter name="${PROJECT_SHA1}_${service}")
-    docker rename "${containerID}" "${PROJECT_NAME}_${service}"
+    local containerID=$(docker ps -a -q --filter name="${PROJECT_SHA1}_${service}")
+    if [[ -n "${containerID}" ]]; then
+      docker rename "${containerID}" "${PROJECT_NAME}_${service}"
+    fi
   done
 }
 

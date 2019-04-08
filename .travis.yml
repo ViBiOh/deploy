@@ -1,3 +1,7 @@
+env:
+  matrix:
+    secure: LAumX4DFOvbLRELyVX+pTAXruCYUXvVykvSmPMuTwuNQWheufzkrD5ytcQb/tK+JI+To8ioey2mLFLXSjp3qhvDxi6PO2lPdpFZi6QuRaC3obLgXS6Qg5Jfi2AcM6owKNT5S15lbxN0Xt7TcJMltVUs3KlLTLy2uRzqLADs4m3KwvebLJuRfZsSozAuy+4Vxw5O2zTbSZR8viNnqSvznmadD7kNNifCakzhinPOAxYG1+eHb9jPR0u52lMmusZv24NY/7EDo8CEIu0TQAzk6MQmGCoS6zolQGMSbP4fVmGBJ/loOTkTc3aPtC4XYv4567NrudI+a30mzMQiXZPnmOAMjN3o5120wWwGj3Qu7bHjS3jPvlbV8osWDNiGBwUOsZCjRRgN7dP1nhlop/SnZsR7seIWhG46kodQfyyJ/jwykoNNn/Pe5Ku6dRmOHUMINGt8G5EvWhSagknsIh73j+AXjrCOOF7O39kyNiynv7gEWEKEWxDzF+O8B9K10SGXTnlIsKltbzY6v48kWyJb1rHnB/yi61YMIfUXS6szGdDFdGdKGOiYqUS061A5k0MoLRFpyczh+dTKPY9+REHrgVe/66E9CQgPsGkAhJCDwilN7G5jvDf/ac32gzvGAgbiAndWHb4+Dfe5OXV2WYj2njgVMQuKUgv485GYvN9mN6wA=
+
 jobs:
   include:
   - stage: Build
@@ -17,7 +21,7 @@ jobs:
       docker pull vibioh/$(make name):$(make version)
       docker tag vibioh/$(make name):$(make version) vibioh/$(make name):latest
       docker push vibioh/$(make name):latest
-    after_success: 'curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy'
+    after_success: curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy
 
   - stage: Deploy
     script: skip
