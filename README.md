@@ -6,10 +6,30 @@ Zero-downtime docker-compose deploy
 curl -O https://raw.githubusercontent.com/ViBiOh/docker-compose-deploy/master/deploy.sh
 chmod +x deploy.sh
 
-./deploy.sh awesome_project sha1_default_to_git_sha path_to_your_compose_default_pwd
+./deploy.sh PROJECT_NAME SHA1 DOCKER-COMPOSE-FILE
+```
+
+```bash
+Usage: deploy [PROJECT_NAME] [SHA1] [DOCKER-COMPOSE-FILE]
+  where
+    - PROJECT_NAME         Name of your compose project
+    - SHA1                 Unique identifier of your project (default: git sha1 of commit)
+    - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yml in current dir)
 ```
 
 ## Golang API
+
+You can execute the `deploy.sh` script through HTTP API.
+
+```bash
+curl -X POST http://localhost:1080/[project_name]/[sha1_version] --data-binary @docker-compose.yml
+```
+
+We recommend putting an `Authorization` in front of your server (e.g. reverse-proxy, nginx, etc) if you plan to expose it to the internet.
+
+If something goes wrong during the deploy process, the uploaded `docker-compose.yml` is kept in order to manually retry ou debug what's going on. Otherwise, the file is deleted.
+
+### CLI og HTTP Server
 
 ```bash
 Usage of deploy:
@@ -45,8 +65,6 @@ Usage of deploy:
         [health] User-Agent for check (default "Golang alcotest")
 ```
 
-## Portainer
+## Containers
 
-```bash
-docker volume create portainer_data
-```
+We provide a `docker-compose.yml` which contains the HTTP API and a [Portainer](https://www.portainer.io) container for having a Docker GUI.
