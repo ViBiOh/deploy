@@ -2,7 +2,6 @@ package api
 
 import (
 	"bytes"
-	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -12,7 +11,9 @@ import (
 	"path"
 	"strings"
 
+	"github.com/ViBiOh/httputils/pkg/errors"
 	"github.com/ViBiOh/httputils/pkg/httperror"
+	"github.com/ViBiOh/httputils/pkg/logger"
 	"github.com/ViBiOh/httputils/pkg/tools"
 )
 
@@ -40,6 +41,23 @@ func New(config Config) *App {
 	}
 }
 
+func validateRequest(r *http.Request) (string, string, error) {
+	args := strings.SplitN(strings.TrimPrefix(r.URL.Path, "/"), "/", 2)
+
+	project := strings.TrimSpace(args[0])
+	version := strings.TrimSpace(args[1])
+
+	if project == "" {
+		return "", "", errors.New("project name is required")
+	}
+
+	if version == "" {
+		return "", "", errors.New("version sha is required")
+	}
+
+	return project, version, nil
+}
+
 // Handler for request. Should be use with net/http
 func (a App) Handler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
@@ -48,19 +66,12 @@ func (a App) Handler() http.Handler {
 			return
 		}
 
-		projectName := r.URL.Query().Get("project")
-		if projectName == "" {
-			httperror.BadRequest(w, errors.New("project name is missing"))
-			return
+		project, version, err := validateRequest(r)
+		if err != nil {
+			httperror.BadRequest(w, err)
 		}
 
-		versionSha1 := r.URL.Query().Get("version")
-		if versionSha1 == "" {
-			httperror.BadRequest(w, errors.New("version sha1 is missing"))
-			return
-		}
-
-		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s.yml", versionSha1))
+		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s-%s.yml", project, version))
 		uploadFile, err := os.Create(composeFilename)
 		if err != nil {
 			httperror.InternalServerError(w, err)
@@ -72,7 +83,7 @@ func (a App) Handler() http.Handler {
 			return
 		}
 
-		cmd := exec.Command("./deploy.sh", projectName, versionSha1, composeFilename)
+		cmd := exec.Command("./deploy.sh", project, version, composeFilename)
 
 		var out bytes.Buffer
 		cmd.Stdout = &out
@@ -80,6 +91,8 @@ func (a App) Handler() http.Handler {
 
 		if err := cmd.Run(); err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
+		} else if err := os.Remove(composeFilename); err != nil {
+			logger.Error("%+s", errors.WithStack(err))
 		}
 
 		if _, err := w.Write(out.Bytes()); err != nil {
