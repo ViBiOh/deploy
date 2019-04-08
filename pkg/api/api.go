@@ -69,6 +69,7 @@ func (a App) Handler() http.Handler {
 		project, version, err := validateRequest(r)
 		if err != nil {
 			httperror.BadRequest(w, err)
+			return
 		}
 
 		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s-%s.yml", project, version))
