@@ -1,26 +1,23 @@
-env:
-  global:
-    secure: qHyv9Ye7KS6+7ZdWn6E4fmd2mw4odeLFMUVX6JSmcVanxzJh8icke83gkmIgHc7dWNN8d8OhEum9U4Vt2S5XWZhYlVPn45bv/wE4fgHY/BaoN7bOgct/ejZ8VbC6awHcvO8w6RVN3PmLfuJe4qNJdbaaGvNz8Hg2rbwGk+glNOTiGeBo3oYuYaGAe8jfZTRmWQbdoosTTlV8sshJAvzK1mRFOdG+tZrSz7ipUbNIRw05LLkyyvlX+vExavJcwg4E3AObJ9Ce4cyI44erRqKnVheh6QHdPoYzhw4knEfAjj9ZrqzZSb9+XjUGaatjH8pbyb+3hHSLptk1elXTIA+lUue4j0ftOo9MN5gHDN2CEcoHX7XkwxcHbCSZ7oAyjghwSEhqYxm37In9O+4Rb6Ff+/nSr6d68HM8BEax4XzDvS+MG4VERavKFdX8J173S8zOPoK9ITuH07rh8HhONIEHFZtLyUtSI+RqZP9E4R3bBPZQ+9xldDjeJEM1YdKBlq+1KVOSR/TC81zTC/R1Z88BufJi/TVhQmUVFZ9XH+rMB1aidxez0BC/9Pjk4xoG+VwIrQ7cxrbAvdM6H0hiuygwN2sOadm5hSZd/dQdNpwFPPJVmmDv1GoR/AE8N0mgPIa5fOfTI/Pu+epEGbTxkXK3MD3zIW0cJ4x2v571qr5FxaY=
-
 jobs:
   include:
   - stage: Build
     sudo: required
     services:
     - docker
-    script: docker build -t vibioh/$(make name):$(make version) .
+    script: docker build -t "vibioh/$(make name):$(make version)" .
     after_success: |
       echo "${DOCKER_PASS}" | docker login -u vibioh --password-stdin
-      docker push vibioh/$(make name):$(make version)
+      docker push "vibioh/$(make name):$(make version)"
+
   - stage: Publish
     sudo: required
     services:
     - docker
     script: |
       echo "${DOCKER_PASS}" | docker login -u vibioh --password-stdin
-      docker pull vibioh/$(make name):$(make version)
-      docker tag vibioh/$(make name):$(make version) vibioh/$(make name):latest
-      docker push vibioh/$(make name):latest
+      docker pull "vibioh/$(make name):$(make version)"
+      docker tag "vibioh/$(make name):$(make version)" "vibioh/$(make name):latest"
+      docker push "vibioh/$(make name):latest"
     after_success: curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy
 
   - stage: Deploy
@@ -34,7 +31,7 @@ jobs:
     deploy:
       provider: script
       skip_cleanup: true
-      script: scp -o StrictHostKeyChecking=no docker-compose.yml "${SSH_USER}@${SSH_HOST}:~/docker-compose.yml" && ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS=${BASIC_USERS} PORTAINER_DIR=${PORTAINER_DIR} bash -s" -- < ./deploy.sh $(make name) $(make version)
+      script: scp -o StrictHostKeyChecking=no docker-compose.yml "${SSH_USER}@${SSH_HOST}:~/docker-compose.yml" && ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS='${BASIC_USERS}' PORTAINER_DIR=${PORTAINER_DIR} bash -s" -- < ./deploy.sh $(make name) $(make version)
 
 stages:
 - Build
