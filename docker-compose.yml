@@ -4,6 +4,12 @@ services:
   api:
     image: vibioh/deploy
     command:
+    - -mailerUser
+    - ${MAILER_USER}
+    - -mailerPass
+    - ${MAILER_PASS}
+    - -apiNotificationEmail
+    - ${NOTIFY_EMAIL}
     - -tracingAgent
     - monitoring_jaeger:6831
     - -tracingName

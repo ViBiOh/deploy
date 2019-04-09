@@ -33,14 +33,25 @@ If something goes wrong during the deploy process, the uploaded `docker-compose.
 
 ```bash
 Usage of deploy:
+Usage of deploy:
+  -apiNotification string
+        [api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all') (default "onError")
+  -apiNotificationEmail string
+        [api] Email address to notify
   -apiTempFolder string
-        [api] Temp folder for uploading files
+        [api] Temp folder for uploading files (default "/tmp")
   -csp string
         [owasp] Content-Security-Policy (default "default-src 'self'; base-uri 'self'")
   -frameOptions string
         [owasp] X-Frame-Options (default "deny")
   -hsts
         [owasp] Indicate Strict Transport Security (default true)
+  -mailerPass string
+        [mailer] Mailer Pass
+  -mailerURL string
+        [mailer] Mailer URL (default "https://mailer.vibioh.fr")
+  -mailerUser string
+        [mailer] Mailer User
   -port int
         Listen port (default 1080)
   -prometheusPath string

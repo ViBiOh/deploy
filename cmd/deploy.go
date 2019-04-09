@@ -14,21 +14,23 @@ import (
 	"github.com/ViBiOh/httputils/pkg/owasp"
 	"github.com/ViBiOh/httputils/pkg/prometheus"
 	"github.com/ViBiOh/httputils/pkg/server"
+	"github.com/ViBiOh/mailer/pkg/client"
 )
 
 func main() {
-	fs := flag.NewFlagSet(`deploy`, flag.ExitOnError)
+	fs := flag.NewFlagSet("deploy", flag.ExitOnError)
 
-	serverConfig := httputils.Flags(fs, ``)
-	alcotestConfig := alcotest.Flags(fs, ``)
-	prometheusConfig := prometheus.Flags(fs, `prometheus`)
-	opentracingConfig := opentracing.Flags(fs, `tracing`)
-	owaspConfig := owasp.Flags(fs, ``)
+	serverConfig := httputils.Flags(fs, "")
+	alcotestConfig := alcotest.Flags(fs, "")
+	prometheusConfig := prometheus.Flags(fs, "prometheus")
+	opentracingConfig := opentracing.Flags(fs, "tracing")
+	owaspConfig := owasp.Flags(fs, "")
 
-	apiConfig := api.Flags(fs, `api`)
+	apiConfig := api.Flags(fs, "api")
+	mailerConfig := client.Flags(fs, "mailer")
 
 	if err := fs.Parse(os.Args[1:]); err != nil {
-		logger.Fatal(`%+v`, err)
+		logger.Fatal("%+v", err)
 	}
 
 	alcotest.DoAndExit(alcotestConfig)
@@ -40,7 +42,8 @@ func main() {
 	gzipApp := gzip.New()
 	owaspApp := owasp.New(owaspConfig)
 
-	apiApp := api.New(apiConfig)
+	mailerApp := client.New(mailerConfig)
+	apiApp := api.New(apiConfig, mailerApp)
 
 	handler := server.ChainMiddlewares(apiApp.Handler(), prometheusApp, opentracingApp, gzipApp, owaspApp)
 

@@ -15,29 +15,42 @@ import (
 	"github.com/ViBiOh/httputils/pkg/httperror"
 	"github.com/ViBiOh/httputils/pkg/logger"
 	"github.com/ViBiOh/httputils/pkg/tools"
+	"github.com/ViBiOh/mailer/pkg/client"
 )
 
 // Config of package
 type Config struct {
-	tempFolder *string
+	tempFolder        *string
+	notification      *string
+	notificationEmail *string
 }
 
 // App of package
 type App struct {
-	tempFolder string
+	tempFolder        string
+	notification      string
+	notificationEmail string
+
+	mailerApp *client.App
 }
 
 // Flags adds flags for configuring package
 func Flags(fs *flag.FlagSet, prefix string) Config {
 	return Config{
-		tempFolder: fs.String(tools.ToCamel(fmt.Sprintf("%sTempFolder", prefix)), "/tmp", "[api] Temp folder for uploading files"),
+		tempFolder:        fs.String(tools.ToCamel(fmt.Sprintf("%sTempFolder", prefix)), "/tmp", "[api] Temp folder for uploading files"),
+		notification:      fs.String(tools.ToCamel(fmt.Sprintf("%sNotification", prefix)), "onError", "[api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')"),
+		notificationEmail: fs.String(tools.ToCamel(fmt.Sprintf("%sNotificationEmail", prefix)), "", "[api] Email address to notify"),
 	}
 }
 
 // New creates new App from Config
-func New(config Config) *App {
+func New(config Config, mailerApp *client.App) *App {
 	return &App{
-		tempFolder: strings.TrimSpace(*config.tempFolder),
+		tempFolder:        strings.TrimSpace(*config.tempFolder),
+		notification:      strings.TrimSpace(*config.notification),
+		notificationEmail: strings.TrimSpace(*config.notificationEmail),
+
+		mailerApp: mailerApp,
 	}
 }
 
