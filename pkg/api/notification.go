@@ -24,8 +24,6 @@ func (a *App) sendEmailNotification(ctx context.Context, project string, output 
 	}
 
 	content := string(output)
-	content = green.ReplaceAllString(content, "<span style=\"color: limegreen\">${1}</span>")
-	content = blue.ReplaceAllString(content, "<span style=\"color: royalblue\">${1}</span>")
 	finalOutput := strings.Split(content, "\n")
 
 	notificationContent := map[string]interface{}{
