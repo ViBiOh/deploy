@@ -38,7 +38,7 @@ type App struct {
 func Flags(fs *flag.FlagSet, prefix string) Config {
 	return Config{
 		tempFolder:        fs.String(tools.ToCamel(fmt.Sprintf("%sTempFolder", prefix)), "/tmp", "[api] Temp folder for uploading files"),
-		notification:      fs.String(tools.ToCamel(fmt.Sprintf("%sNotification", prefix)), "onError", "[api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')"),
+		notification:      fs.String(tools.ToCamel(fmt.Sprintf("%sNotification", prefix)), "all", "[api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')"),
 		notificationEmail: fs.String(tools.ToCamel(fmt.Sprintf("%sNotificationEmail", prefix)), "", "[api] Email address to notify"),
 	}
 }

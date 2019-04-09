@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
+	"strings"
 )
 
 const (
@@ -16,10 +17,12 @@ func (a *App) sendEmailNotification(ctx context.Context, project string, output 
 		return nil
 	}
 
+	content := strings.Split(string(output), "\n")
+
 	notificationContent := map[string]interface{}{
-		"Success": success,
-		"App":     project,
-		"Output":  output,
+		"success": success,
+		"app":     project,
+		"output":  content,
 	}
 
 	recipients := []string{a.notificationEmail}
