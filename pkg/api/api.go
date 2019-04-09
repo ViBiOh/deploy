@@ -2,6 +2,7 @@ package api
 
 import (
 	"bytes"
+	"context"
 	"flag"
 	"fmt"
 	"io"
@@ -103,14 +104,21 @@ func (a App) Handler() http.Handler {
 		cmd.Stdout = &out
 		cmd.Stderr = &out
 
-		if err := cmd.Run(); err != nil {
+		err = cmd.Run()
+		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
-		} else if err := os.Remove(composeFilename); err != nil {
-			logger.Error("%+s", errors.WithStack(err))
+		} else if removeErr := os.Remove(composeFilename); removeErr != nil {
+			logger.Error("%+s", errors.WithStack(removeErr))
 		}
 
-		if _, err := w.Write(out.Bytes()); err != nil {
+		output := out.Bytes()
+		if err := a.sendEmailNotification(context.Background(), project, output, err != nil); err != nil {
+			logger.Error("%+s", err)
+		}
+
+		if _, err := w.Write(output); err != nil {
 			httperror.InternalServerError(w, err)
 		}
+
 	})
 }
