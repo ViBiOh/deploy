@@ -112,7 +112,7 @@ func (a App) Handler() http.Handler {
 		}
 
 		output := out.Bytes()
-		if err := a.sendEmailNotification(context.Background(), project, output, err != nil); err != nil {
+		if err := a.sendEmailNotification(context.Background(), project, output, err == nil); err != nil {
 			logger.Error("%+s", err)
 		}
 

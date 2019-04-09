@@ -3,6 +3,7 @@ package api
 import (
 	"context"
 	"fmt"
+	"regexp"
 	"strings"
 )
 
@@ -12,17 +13,25 @@ const (
 	all     = "all"
 )
 
+var (
+	green = regexp.MustCompile(`(?m)\[0;32m(.*?)\[0m`)
+	blue  = regexp.MustCompile(`(?m)\[0;34m(.*?)\[0m`)
+)
+
 func (a *App) sendEmailNotification(ctx context.Context, project string, output []byte, success bool) error {
 	if a.notification == never || (success && a.notification == onError) {
 		return nil
 	}
 
-	content := strings.Split(string(output), "\n")
+	content := string(output)
+	content = green.ReplaceAllString(content, "<span style=\"color: limegreen\">${1}</span>")
+	content = blue.ReplaceAllString(content, "<span style=\"color: royalblue\">${1}</span>")
+	finalOutput := strings.Split(content, "\n")
 
 	notificationContent := map[string]interface{}{
 		"success": success,
 		"app":     project,
-		"output":  content,
+		"output":  finalOutput,
 	}
 
 	recipients := []string{a.notificationEmail}
