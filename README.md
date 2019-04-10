@@ -27,7 +27,7 @@ curl -X POST http://localhost:1080/[project_name]/[sha1_version] --data-binary @
 
 We recommend putting an `Authorization` in front of your server (e.g. reverse-proxy, nginx, etc) if you plan to expose it to the internet.
 
-If something goes wrong during the deploy process, the uploaded `docker-compose.yml` is kept in order to manually retry ou debug what's going on. Otherwise, the file is deleted.
+If something goes wrong during the deploy process, the uploaded `docker-compose.yml` is kept in order to manually retry or debug what's going on. Otherwise, the file is deleted.
 
 ### CLI og HTTP Server
 

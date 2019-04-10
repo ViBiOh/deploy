@@ -11,7 +11,7 @@
 
 [[projects]]
   branch = "master"
-  digest = "1:1877118d8b4b15b18eb8877d6677d354fe8cba26c76ea67c6d194b5b067a08c5"
+  digest = "1:d86c232c46fa8223915bbeada6681db72a39439903def6b0f6bdc518a9621d6e"
   name = "github.com/ViBiOh/httputils"
   packages = [
     "pkg",
@@ -26,11 +26,20 @@
     "pkg/opentracing",
     "pkg/owasp",
     "pkg/prometheus",
+    "pkg/request",
     "pkg/server",
     "pkg/tools",
   ]
   pruneopts = "UT"
   revision = "864a7148bc82cda83652d30ce21a8c48909b5927"
+
+[[projects]]
+  branch = "master"
+  digest = "1:d2fc922625e630dcc16edcf7a7e7fe0b31143189d5ad065041e2aa08dbd1ce2b"
+  name = "github.com/ViBiOh/mailer"
+  packages = ["pkg/client"]
+  pruneopts = "UT"
+  revision = "c91cdada9d41aaa75e596da7be0b8a7fbee958fa"
 
 [[projects]]
   branch = "master"
@@ -174,6 +183,7 @@
     "github.com/ViBiOh/httputils/pkg/prometheus",
     "github.com/ViBiOh/httputils/pkg/server",
     "github.com/ViBiOh/httputils/pkg/tools",
+    "github.com/ViBiOh/mailer/pkg/client",
   ]
   solver-name = "gps-cdcl"
   solver-version = 1
