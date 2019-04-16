@@ -54,6 +54,14 @@ are_services_healthy() {
   local PROJECT_SHA1="${1}"
   local COMPOSE_FILE="${2}"
 
+  local runningContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
+  local allContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q -a | wc -l)
+
+  if [[ "${runningContainers}" != "${allContainers}" ]]; then
+    echo "false"
+    return
+  fi
+
   local WAIT_TIMEOUT="35"
 
   printf "${YELLOW}Waiting ${WAIT_TIMEOUT} seconds for containers to start...${RESET}\n"
@@ -62,7 +70,12 @@ are_services_healthy() {
   local healthcheckCount=$(count_services_with_health "${PROJECT_SHA1}" "${COMPOSE_FILE}")
   local healthyCount=$(docker events --until "${timeout}" -f event="health_status: healthy" -f name="^${PROJECT_SHA1}" | wc -l)
 
-  [[ "${healthcheckCount}" == "${healthyCount}" ]] && echo "true" || echo "false"
+  if [[ "${healthcheckCount}" != "${healthyCount}" ]]; then
+    echo "false"
+    return
+  fi
+
+  echo "true"
 }
 
 revert_services() {
@@ -166,6 +179,12 @@ deploy() {
     printf "    - SHA1                 Unique identifier of your project (default: git sha1 of commit)\n"
     printf "    - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yml in current dir)\n"
     printf "${RESET}"
+
+    return 1
+  fi
+
+  if [[ "$(docker-compose version --short)" < "1.24.0" ]]; then
+    printf "${RED}You need at least docker-compose@1.24.0, please upgrade${RESET}"
 
     return 1
   fi
