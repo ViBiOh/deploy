@@ -79,7 +79,7 @@ are_services_healthy() {
 }
 
 revert_services() {
-  if [[ "${#}" -ne 3 ]]; then
+  if [[ "${#}" -ne 2 ]]; then
     printf "${RED}Usage: revert_services [PROJECT_SHA1] [DOCKER-COMPOSE-FILE]${RESET}\n"
     return 1
   fi
