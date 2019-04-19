@@ -55,7 +55,9 @@ are_services_healthy() {
   local COMPOSE_FILE="${2}"
 
   local runningContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
-  local allContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q -a | wc -l)
+
+  # add `-a` options when issues on docker-compose is resolved
+  local allContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
 
   if [[ "${runningContainers}" != "${allContainers}" ]]; then
     echo "false"
