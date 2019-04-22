@@ -42,7 +42,7 @@ count_services_with_health() {
     fi
   done
 
-  echo "${counter}"
+  printf "${counter}"
 }
 
 are_services_healthy() {
@@ -55,12 +55,14 @@ are_services_healthy() {
   local COMPOSE_FILE="${2}"
 
   local runningContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
+  printf "${BLUE}${runningContainers} running${RESET}"
 
   # add `-a` options when issues on docker-compose is resolved
   local allContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
+  printf "${BLUE}${allContainers} total${RESET}"
 
   if [[ "${runningContainers}" != "${allContainers}" ]]; then
-    echo "false"
+    printf "false"
     return
   fi
 
@@ -70,14 +72,17 @@ are_services_healthy() {
   timeout=$(date --date="${WAIT_TIMEOUT} seconds" +%s)
 
   local healthcheckCount=$(count_services_with_health "${PROJECT_SHA1}" "${COMPOSE_FILE}")
+  printf "${BLUE}${healthcheckCount} with healthcheck${RESET}"
+
   local healthyCount=$(docker events --until "${timeout}" -f event="health_status: healthy" -f name="^${PROJECT_SHA1}" | wc -l)
+  printf "${BLUE}${healthyCount} healthy${RESET}"
 
   if [[ "${healthcheckCount}" != "${healthyCount}" ]]; then
-    echo "false"
+    printf "false"
     return
   fi
 
-  echo "true"
+  printf "true"
 }
 
 revert_services() {
