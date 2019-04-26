@@ -26,10 +26,6 @@ services:
       traefik.frontend.auth.basic.users: '${BASIC_USERS}'
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
-    logging:
-      driver: json-file
-      options:
-        max-size: '10m'
     restart: on-failure:5
     cpu_shares: 128
     mem_limit: 134217728
@@ -51,10 +47,6 @@ services:
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     - ${PORTAINER_DIR}:/data
-    logging:
-      driver: json-file
-      options:
-        max-size: '10m'
     restart: on-failure:5
     cpu_shares: 128
     mem_limit: 134217728
