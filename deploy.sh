@@ -99,8 +99,6 @@ revert_services() {
   # Force continuation in case of errors for keeping a clean state
   set +e
 
-  docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" logs
-
   for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q); do
     if [[ $(docker inspect --format '{{ .State.Health }}' "${service}") != '<nil>' ]]; then
       docker inspect --format='{{ .Name }}{{ "\n" }}{{range .State.Health.Log }}code={{ .ExitCode }}, log={{ .Output }}{{ end }}' "${service}"
@@ -202,7 +200,10 @@ deploy() {
 
   start_services "${PROJECT_SHA1}" "${PROJECT_NAME}" "${COMPOSE_FILE}"
 
-  if [[ $(are_services_healthy "${PROJECT_SHA1}" "${COMPOSE_FILE}") == "false" ]]; then
+  is_healthy=$(are_services_healthy "${PROJECT_SHA1}" "${COMPOSE_FILE}")
+  docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" logs
+  
+  if [[ "${is_healthy}" == "false" ]]; then
     revert_services "${PROJECT_SHA1}" "${COMPOSE_FILE}"
     return 1
   fi
