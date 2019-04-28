@@ -33,19 +33,22 @@ If something goes wrong during the deploy process, the uploaded `docker-compose.
 
 ```bash
 Usage of deploy:
-Usage of deploy:
   -apiNotification string
         [api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all') (default "onError")
   -apiNotificationEmail string
         [api] Email address to notify
   -apiTempFolder string
         [api] Temp folder for uploading files (default "/tmp")
+  -cert string
+        [http] Certificate file
   -csp string
         [owasp] Content-Security-Policy (default "default-src 'self'; base-uri 'self'")
   -frameOptions string
         [owasp] X-Frame-Options (default "deny")
   -hsts
         [owasp] Indicate Strict Transport Security (default true)
+  -key string
+        [http] Key file
   -mailerPass string
         [mailer] Mailer Pass
   -mailerURL string
@@ -53,27 +56,17 @@ Usage of deploy:
   -mailerUser string
         [mailer] Mailer User
   -port int
-        Listen port (default 1080)
+        [http] Listen port (default 1080)
   -prometheusPath string
         [prometheus] Path for exposing metrics (default "/metrics")
-  -tls
-        Serve TLS content (default true)
-  -tlsCert string
-        [tls] PEM Certificate file
-  -tlsHosts string
-        [tls] Self-signed certificate hosts, comma separated (default "localhost")
-  -tlsKey string
-        [tls] PEM Key file
-  -tlsOrganization string
-        [tls] Self-signed certificate organization (default "ViBiOh")
   -tracingAgent string
-        [opentracing] Jaeger Agent (e.g. host:port) (default "jaeger:6831")
+        [tracing] Jaeger Agent (e.g. host:port) (default "jaeger:6831")
   -tracingName string
-        [opentracing] Service name
+        [tracing] Service name
   -url string
-        [health] URL to check
+        [alcotest] URL to check
   -userAgent string
-        [health] User-Agent for check (default "Golang alcotest")
+        [alcotest] User-Agent for check (default "Golang alcotest")
 ```
 
 ## Containers

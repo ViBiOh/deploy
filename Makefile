@@ -87,5 +87,4 @@ build:
 ## start: Start app
 .PHONY: start
 start:
-	$(SERVER_RUNNER) \
-		-tls=false
+	$(SERVER_RUNNER)
