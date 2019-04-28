@@ -18,7 +18,7 @@ EXPOSE 1080
 RUN apk --update add bash coreutils \
  && rm -rf /var/cache/apk/*
 
-HEALTHCHECK --retries=10 CMD [ "/deploy", "-url", "https://localhost:1080/health" ]
+HEALTHCHECK --retries=10 CMD [ "/deploy", "-url", "http://localhost:1080/health" ]
 ENTRYPOINT [ "/deploy" ]
 
 COPY --from=builder /app/${APP_NAME} /
