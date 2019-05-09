@@ -3,6 +3,7 @@
 [![Build Status](https://travis-ci.org/ViBiOh/deploy.svg?branch=master)](https://travis-ci.org/ViBiOh/deploy)
 [![Go Report Card](https://goreportcard.com/badge/github.com/ViBiOh/deploy)](https://goreportcard.com/report/github.com/ViBiOh/deploy)
 [![codecov](https://codecov.io/gh/ViBiOh/deploy/branch/master/graph/badge.svg)](https://codecov.io/gh/ViBiOh/deploy)
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_shield)
 
 Zero-downtime docker-compose deploy
 
@@ -76,3 +77,7 @@ Usage of deploy:
 ## Containers
 
 We provide a `docker-compose.yml` which contains the HTTP API and a [Portainer](https://www.portainer.io) container for having a Docker GUI.
+
+
+## License
+[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_large)
