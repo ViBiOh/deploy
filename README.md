@@ -78,6 +78,5 @@ Usage of deploy:
 
 We provide a `docker-compose.yml` which contains the HTTP API and a [Portainer](https://www.portainer.io) container for having a Docker GUI.
 
-
 ## License
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_large)

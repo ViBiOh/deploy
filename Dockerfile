@@ -1,11 +1,13 @@
 FROM golang:1.12 as builder
 
+ARG CODECOV_TOKEN
 ENV APP_NAME deploy
 
 WORKDIR /app
 COPY . .
 
-RUN make ${APP_NAME}
+RUN make ${APP_NAME} \
+ && bash <(curl -s https://codecov.io/bash)
 
 FROM docker/compose:1.24.0
 
