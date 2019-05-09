@@ -1,9 +1,13 @@
 # deploy
 
+[![Build Status](https://travis-ci.org/ViBiOh/deploy.svg?branch=master)](https://travis-ci.org/ViBiOh/deploy)
+[![Go Report Card](https://goreportcard.com/badge/github.com/ViBiOh/deploy)](https://goreportcard.com/report/github.com/ViBiOh/deploy)
+[![codecov](https://codecov.io/gh/ViBiOh/deploy/branch/master/graph/badge.svg)](https://codecov.io/gh/ViBiOh/deploy)
+
 Zero-downtime docker-compose deploy
 
 ```bash
-curl -O https://raw.githubusercontent.com/ViBiOh/docker-compose-deploy/master/deploy.sh
+curl -O https://raw.githubusercontent.com/ViBiOh/deploy/master/deploy.sh
 chmod +x deploy.sh
 
 ./deploy.sh PROJECT_NAME SHA1 DOCKER-COMPOSE-FILE

@@ -55,21 +55,23 @@ func New(config Config, mailerApp *client.App) *App {
 	}
 }
 
-func validateRequest(r *http.Request) (string, string, error) {
-	args := strings.SplitN(strings.TrimPrefix(r.URL.Path, "/"), "/", 2)
+func validateRequest(r *http.Request) (project string, version string, err error) {
+	args := strings.SplitN(strings.Trim(r.URL.Path, "/"), "/", 2)
 
-	project := strings.TrimSpace(args[0])
-	version := strings.TrimSpace(args[1])
-
+	project = strings.TrimSpace(args[0])
 	if project == "" {
-		return "", "", errors.New("project name is required")
+		err = errors.New("project name is required")
+		return
 	}
 
-	if version == "" {
-		return "", "", errors.New("version sha is required")
+	if len(args) == 1 {
+		err = errors.New("version sha is required")
+		return
 	}
 
-	return project, version, nil
+	version = strings.TrimSpace(args[1])
+
+	return
 }
 
 // Handler for request. Should be use with net/http
