@@ -7,7 +7,7 @@ WORKDIR /app
 COPY . .
 
 RUN make ${APP_NAME} \
- && bash <(curl -s https://codecov.io/bash)
+ && curl -s https://codecov.io/bash | bash
 
 FROM docker/compose:1.24.0
 
