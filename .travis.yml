@@ -8,6 +8,7 @@ jobs:
     after_success:
     - echo "${DOCKER_PASS}" | docker login -u vibioh --password-stdin
     - docker push "vibioh/$(make name):$(make version)"
+    - bash <(curl -s https://codecov.io/bash)
 
   - stage: Publish
     sudo: required
@@ -20,7 +21,6 @@ jobs:
     - docker push "vibioh/$(make name):latest"
     after_success:
     - curl -s -X POST https://goreportcard.com/checks?repo=github.com/ViBiOh/deploy
-    - bash <(curl -s https://codecov.io/bash)
 
   - stage: Deploy
     script: skip
