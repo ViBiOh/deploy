@@ -69,9 +69,5 @@ func (a *App) sendEmailNotification(ctx context.Context, project string, output 
 
 	recipients := []string{a.notificationEmail}
 
-	if err := a.mailerApp.SendEmail(ctx, "deploy", "deploy@vibioh.fr", "Deploy", fmt.Sprintf("[deploy] Deploy of %s", project), recipients, notificationContent); err != nil {
-		return err
-	}
-
-	return nil
+	return a.mailerApp.SendEmail(ctx, "deploy", "deploy@vibioh.fr", "Deploy", fmt.Sprintf("[deploy] Deploy of %s", project), recipients, notificationContent)
 }
