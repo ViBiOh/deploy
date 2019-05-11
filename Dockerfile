@@ -1,10 +1,10 @@
 FROM golang:1.12 as builder
 
 ARG CODECOV_TOKEN
-ENV APP_NAME deploy
-
 WORKDIR /app
 COPY . .
+
+ENV APP_NAME deploy
 
 RUN make ${APP_NAME} \
  && curl -s https://codecov.io/bash | bash
