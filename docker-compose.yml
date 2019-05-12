@@ -37,7 +37,7 @@ services:
     image: portainer/portainer
     labels:
       traefik.frontend.passHostHeader: 'true'
-      traefik.frontend.rule: 'Host: docker.vibioh.fr'
+      traefik.frontend.rule: 'Host: portainer.vibioh.fr'
       traefik.protocol: 'http'
       traefik.port: '9000'
       traefik.frontend.rateLimit.extractorFunc: 'client.ip'

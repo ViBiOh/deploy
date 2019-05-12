@@ -1,17 +1,15 @@
 FROM golang:1.12 as builder
 
-ARG CODECOV_TOKEN
 WORKDIR /app
 COPY . .
 
-ENV APP_NAME deploy
+RUN make deploy
 
-RUN make ${APP_NAME} \
- && curl -s https://codecov.io/bash | bash
+ARG CODECOV_TOKEN
+RUN curl -s https://codecov.io/bash | bash
 
 FROM docker/compose:1.24.0
 
-ENV APP_NAME deploy
 EXPOSE 1080
 
 RUN apk --update add bash coreutils \
@@ -20,5 +18,8 @@ RUN apk --update add bash coreutils \
 HEALTHCHECK --retries=10 CMD [ "/deploy", "-url", "http://localhost:1080/health" ]
 ENTRYPOINT [ "/deploy" ]
 
-COPY --from=builder /app/bin/${APP_NAME} /
+ARG APP_VERSION
+ENV VERSION=${APP_VERSION}
+
+COPY --from=builder /app/bin/deploy /
 COPY deploy.sh /deploy.sh
