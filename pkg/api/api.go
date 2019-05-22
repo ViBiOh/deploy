@@ -91,12 +91,12 @@ func (a App) Handler() http.Handler {
 		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s-%s.yml", project, version))
 		uploadFile, err := os.Create(composeFilename)
 		if err != nil {
-			httperror.InternalServerError(w, err)
+			httperror.InternalServerError(w, errors.WithStack(err))
 			return
 		}
 
 		if _, err := io.Copy(uploadFile, r.Body); err != nil {
-			httperror.InternalServerError(w, err)
+			httperror.InternalServerError(w, errors.WithStack(err))
 			return
 		}
 
@@ -114,12 +114,14 @@ func (a App) Handler() http.Handler {
 		}
 
 		output := out.Bytes()
+		logger.Info("%s", output)
+
 		if err := a.sendEmailNotification(context.Background(), project, output, err == nil); err != nil {
 			logger.Error("%+s", err)
 		}
 
 		if _, err := w.Write(output); err != nil {
-			httperror.InternalServerError(w, err)
+			httperror.InternalServerError(w, errors.WithStack(err))
 		}
 
 	})
