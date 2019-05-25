@@ -28,7 +28,7 @@ services:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: on-failure:5
     cpu_shares: 128
-    mem_limit: 67108864
+    mem_limit: 201326592
     user: '0'
     security_opt:
     - no-new-privileges
