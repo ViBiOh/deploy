@@ -36,6 +36,7 @@ count_services_with_health() {
 
   local counter=0
 
+  # add `-a` options when issues on docker-compose is resolved
   for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q); do
     if [[ $(docker inspect --format '{{ .State.Health }}' "${service}") != '<nil>' ]]; then
       counter=$((counter+1))
@@ -172,7 +173,8 @@ clean() {
   printf "${BLUE}Cleaning docker system${RESET}\n"
 
   set +e
-  docker system prune -f
+  docker rmi $(docker images -q)
+  docker network prune -f
   set -e
 }
 
