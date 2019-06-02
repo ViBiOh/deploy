@@ -66,7 +66,7 @@ func TestValidateRequest(t *testing.T) {
 			}
 
 			if failed {
-				t.Errorf("ValidateRequest(%+v) = (`%s`, `%s`, %+v), want (`%s`, `%s`, %+v)", testCase.input, project, version, err, testCase.wantProject, testCase.wantVersion, testCase.wantErr)
+				t.Errorf("ValidateRequest(%#v) = (`%s`, `%s`, %#v), want (`%s`, `%s`, %#v)", testCase.input, project, version, err, testCase.wantProject, testCase.wantVersion, testCase.wantErr)
 			}
 		})
 	}
