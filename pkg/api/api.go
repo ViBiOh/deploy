@@ -32,7 +32,7 @@ type App struct {
 	notification      string
 	notificationEmail string
 
-	mailerApp *client.App
+	mailerApp client.App
 }
 
 // Flags adds flags for configuring package
@@ -45,7 +45,7 @@ func Flags(fs *flag.FlagSet, prefix string) Config {
 }
 
 // New creates new App from Config
-func New(config Config, mailerApp *client.App) *App {
+func New(config Config, mailerApp client.App) *App {
 	return &App{
 		tempFolder:        strings.TrimSpace(*config.tempFolder),
 		notification:      strings.TrimSpace(*config.notification),

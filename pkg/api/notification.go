@@ -5,6 +5,8 @@ import (
 	"fmt"
 	"regexp"
 	"strings"
+
+	"github.com/ViBiOh/mailer/pkg/client"
 )
 
 type outputLine struct {
@@ -69,5 +71,5 @@ func (a *App) sendEmailNotification(ctx context.Context, project string, output 
 
 	recipients := []string{a.notificationEmail}
 
-	return a.mailerApp.SendEmail(ctx, "deploy", "deploy@vibioh.fr", "Deploy", fmt.Sprintf("[deploy] Deploy of %s", project), recipients, notificationContent)
+	return client.NewEmail(a.mailerApp).From("deploy@vibioh.fr").As("Deploy").WithSubject(fmt.Sprintf("[deploy] Deploy of %s", project)).Data(notificationContent).To(recipients...).Send(ctx)
 }
