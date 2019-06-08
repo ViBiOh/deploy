@@ -45,13 +45,11 @@ func TestValidateRequest(t *testing.T) {
 		},
 	}
 
-	var failed bool
-
 	for _, testCase := range cases {
 		t.Run(testCase.intention, func(t *testing.T) {
 			project, version, err := validateRequest(testCase.input)
 
-			failed = false
+			failed := false
 
 			if err == nil && testCase.wantErr != nil {
 				failed = true
