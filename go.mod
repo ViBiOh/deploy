@@ -3,6 +3,6 @@ module github.com/ViBiOh/deploy
 go 1.12
 
 require (
-	github.com/ViBiOh/httputils v0.0.0-20190627205713-52ada102efaf
-	github.com/ViBiOh/mailer v0.0.0-20190628070818-2ad092f019f4
+	github.com/ViBiOh/httputils v0.0.0-20190629090518-e8661bee8266
+	github.com/ViBiOh/mailer v0.0.0-20190629091146-9624332bf14f
 )
