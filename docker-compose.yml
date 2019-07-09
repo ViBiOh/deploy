@@ -33,27 +33,6 @@ services:
     security_opt:
     - no-new-privileges
 
-  portainer:
-    image: portainer/portainer
-    labels:
-      traefik.frontend.passHostHeader: 'true'
-      traefik.frontend.rule: 'Host: portainer.vibioh.fr'
-      traefik.protocol: 'http'
-      traefik.port: '9000'
-      traefik.frontend.rateLimit.extractorFunc: 'client.ip'
-      traefik.frontend.rateLimit.rateSet.first.period: '60s'
-      traefik.frontend.rateLimit.rateSet.first.average: '100'
-      traefik.frontend.rateLimit.rateSet.first.burst: '200'
-    volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
-    - ${PORTAINER_DIR}:/data
-    restart: on-failure:5
-    cpu_shares: 128
-    mem_limit: 67108864
-    read_only: true
-    security_opt:
-    - no-new-privileges
-
 networks:
   default:
     external:

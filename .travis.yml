@@ -32,7 +32,7 @@ jobs:
     deploy:
       provider: script
       skip_cleanup: true
-      script: scp -o StrictHostKeyChecking=no docker-compose.yml "${SSH_USER}@${SSH_HOST}:~/docker-compose.yml" && ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS='${BASIC_USERS}' PORTAINER_DIR='${PORTAINER_DIR}' MAILER_USER='${MAILER_USER}' MAILER_PASS='${MAILER_PASS}' NOTIFY_EMAIL='${NOTIFY_EMAIL}' bash -s" -- < ./deploy.sh $(make name) $(make version)
+      script: scp -o StrictHostKeyChecking=no docker-compose.yml "${SSH_USER}@${SSH_HOST}:~/docker-compose.yml" && ssh -o StrictHostKeyChecking=no ${SSH_USER}@${SSH_HOST} "BASIC_USERS='${BASIC_USERS}' MAILER_USER='${MAILER_USER}' MAILER_PASS='${MAILER_PASS}' NOTIFY_EMAIL='${NOTIFY_EMAIL}' bash -s" -- < ./deploy.sh $(make name) $(make version)
 
 stages:
 - Build
