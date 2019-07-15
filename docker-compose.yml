@@ -11,7 +11,7 @@ services:
     - -apiNotificationEmail
     - ${NOTIFY_EMAIL}
     - -tracingAgent
-    - monitoring_jaeger:6831
+    - monitoring_jaeger_1:6831
     - -tracingName
     - deploy
     labels:
