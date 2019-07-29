@@ -8,7 +8,7 @@ RUN make
 ARG CODECOV_TOKEN
 RUN curl -s https://codecov.io/bash | bash
 
-FROM docker/compose:1.24.0
+FROM docker/compose:1.25.0-rc1
 
 EXPOSE 1080
 

@@ -36,8 +36,7 @@ count_services_with_health() {
 
   local counter=0
 
-  # add `-a` options when issues on docker-compose is resolved
-  for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q); do
+  for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -a -q); do
     if [[ $(docker inspect --format '{{ .State.Health }}' "${service}") != '<nil>' ]]; then
       counter=$((counter+1))
     fi
@@ -58,8 +57,7 @@ are_services_healthy() {
   local runningContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
   printf "${BLUE}${runningContainers} running${RESET}"
 
-  # add `-a` options when issues on docker-compose is resolved
-  local allContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q | wc -l)
+  local allContainers=$(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -a -q | wc -l)
   printf "${BLUE}${allContainers} total${RESET}"
 
   if [[ "${runningContainers}" != "${allContainers}" ]]; then
@@ -100,7 +98,7 @@ revert_services() {
   # Force continuation in case of errors for keeping a clean state
   set +e
 
-  for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q); do
+  for service in $(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -a -q); do
     if [[ $(docker inspect --format '{{ .State.Health }}' "${service}") != '<nil>' ]]; then
       docker inspect --format='{{ .Name }}{{ "\n" }}{{range .State.Health.Log }}code={{ .ExitCode }}, log={{ .Output }}{{ end }}' "${service}"
     fi
@@ -124,7 +122,7 @@ remove_old_services() {
   printf "${BLUE}Removing old containers from ${PROJECT_NAME}${RESET}\n"
 
   local projectServices=($(docker ps -f name="^${PROJECT_NAME}*" -q))
-  local composeServices=($(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -q))
+  local composeServices=($(docker-compose -p "${PROJECT_SHA1}" -f "${COMPOSE_FILE}" ps -a -q))
 
   local containersToRemove=()
 
