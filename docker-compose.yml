@@ -2,7 +2,7 @@ version: '2'
 
 services:
   api:
-    image: vibioh/deploy
+    image: vibioh/deploy:latest
     command:
     - -mailerUser
     - ${MAILER_USER}
@@ -10,10 +10,6 @@ services:
     - ${MAILER_PASS}
     - -apiNotificationEmail
     - ${NOTIFY_EMAIL}
-    - -tracingAgent
-    - monitoring_jaeger_1:6831
-    - -tracingName
-    - deploy
     labels:
       traefik.frontend.passHostHeader: 'true'
       traefik.frontend.rule: 'Host: deploy.vibioh.fr'
