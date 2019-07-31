@@ -32,8 +32,3 @@ services:
     user: '0'
     security_opt:
     - no-new-privileges
-
-networks:
-  default:
-    external:
-      name: traefik
