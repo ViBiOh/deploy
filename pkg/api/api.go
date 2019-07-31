@@ -55,21 +55,12 @@ func New(config Config, mailerApp client.App) *App {
 	}
 }
 
-func validateRequest(r *http.Request) (project string, version string, err error) {
-	args := strings.SplitN(strings.Trim(r.URL.Path, "/"), "/", 2)
-
-	project = strings.TrimSpace(args[0])
+func validateRequest(r *http.Request) (project string, err error) {
+	project = strings.TrimSpace(strings.Trim(r.URL.Path, "/"))
 	if project == "" {
 		err = errors.New("project name is required")
 		return
 	}
-
-	if len(args) == 1 {
-		err = errors.New("version sha is required")
-		return
-	}
-
-	version = strings.TrimSpace(args[1])
 
 	return
 }
@@ -82,13 +73,13 @@ func (a App) Handler() http.Handler {
 			return
 		}
 
-		project, version, err := validateRequest(r)
+		project, err := validateRequest(r)
 		if err != nil {
 			httperror.BadRequest(w, err)
 			return
 		}
 
-		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s-%s.yml", project, version))
+		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s.yml", project))
 		uploadFile, err := os.Create(composeFilename)
 		if err != nil {
 			httperror.InternalServerError(w, errors.WithStack(err))
@@ -100,7 +91,7 @@ func (a App) Handler() http.Handler {
 			return
 		}
 
-		cmd := exec.Command("./deploy.sh", project, version, composeFilename)
+		cmd := exec.Command("./deploy.sh", project, composeFilename)
 
 		var out bytes.Buffer
 		cmd.Stdout = &out
