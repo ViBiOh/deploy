@@ -2,7 +2,7 @@ version: '2'
 
 services:
   api:
-    image: vibioh/deploy:latest
+    image: vibioh/deploy
     command:
     - -mailerUser
     - ${MAILER_USER}
