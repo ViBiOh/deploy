@@ -2,7 +2,18 @@
 
 set -o nounset -o pipefail -o errexit
 
+clean() {
+  docker image prune -f
+  docker network prune -f
+  docker volume prune -f
+}
+
 deploy() {
+  local RED='\033[0;31m'
+  local GREEN='\033[0;32m'
+  local BLUE='\033[0;34m'
+  local RESET='\033[0m'
+
   if [[ "${#}" -lt 1 ]]; then
     printf "${RED}Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]\n"
     printf "  where\n"
@@ -16,15 +27,10 @@ deploy() {
   local PROJECT_NAME="${1}"
   local COMPOSE_FILE="${2:-docker-compose.yml}"
 
-  local RED='\033[0;31m'
-  local GREEN='\033[0;32m'
-  local BLUE='\033[0;34m'
-  local RESET='\033[0m'
-
   printf "${GREEN}Starting services of ${PROJECT_NAME}${RESET}\n"
 
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" config -q
-  docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" pull
+  docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" pull -q
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" up -d --remove-orphans
 
   printf "${GREEN}Logs for services of ${PROJECT_NAME}${RESET}\n"
@@ -32,11 +38,7 @@ deploy() {
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" logs
 
   printf "${BLUE}Cleaning${RESET}\n"
-
-  set +e
-  docker rmi $(docker images -q)
-  docker network rm $(docker network ls -q)
-  set -e
+  clean
 
   printf "${GREEN}Deploy successful! ${RESET}\n"
 }
