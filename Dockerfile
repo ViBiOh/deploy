@@ -12,7 +12,7 @@ FROM docker/compose:1.25.0-rc1
 
 EXPOSE 1080
 
-RUN apk --update add bash coreutils \
+RUN apk --update add bash coreutils ca-certificates \
  && rm -rf /var/cache/apk/*
 
 HEALTHCHECK --retries=10 CMD [ "/deploy", "-url", "http://localhost:1080/health" ]
