@@ -15,11 +15,7 @@ deploy() {
   local RESET='\033[0m'
 
   if [[ "${#}" -lt 1 ]]; then
-    printf "${RED}Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]\n"
-    printf "  where\n"
-    printf "    - PROJECT_NAME         Name of your compose project\n"
-    printf "    - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yml in current dir)\n"
-    printf "${RESET}"
+    printf "${RED}Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]${RESET}"
 
     return 1
   fi
@@ -27,13 +23,13 @@ deploy() {
   local PROJECT_NAME="${1}"
   local COMPOSE_FILE="${2:-docker-compose.yml}"
 
-  printf "${GREEN}Starting services of ${PROJECT_NAME}${RESET}\n"
+  printf "${BLUE}Starting services of ${PROJECT_NAME}${RESET}\n"
 
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" config -q
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" pull -q
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" up -d --remove-orphans
 
-  printf "${GREEN}Logs for services of ${PROJECT_NAME}${RESET}\n"
+  printf "${BLUE}Logs for services of ${PROJECT_NAME}${RESET}\n"
 
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" logs
 

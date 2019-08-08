@@ -11,14 +11,13 @@ Zero-downtime docker-compose deploy
 curl -O https://raw.githubusercontent.com/ViBiOh/deploy/master/deploy.sh
 chmod +x deploy.sh
 
-./deploy.sh PROJECT_NAME SHA1 DOCKER-COMPOSE-FILE
+./deploy.sh PROJECT_NAME DOCKER-COMPOSE-FILE
 ```
 
 ```bash
-Usage: deploy [PROJECT_NAME] [SHA1] [DOCKER-COMPOSE-FILE]
+Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]
   where
     - PROJECT_NAME         Name of your compose project
-    - SHA1                 Unique identifier of your project (default: git sha1 of commit)
     - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yml in current dir)
 ```
 
@@ -27,7 +26,7 @@ Usage: deploy [PROJECT_NAME] [SHA1] [DOCKER-COMPOSE-FILE]
 You can execute the `deploy.sh` script through HTTP API.
 
 ```bash
-curl -X POST http://localhost:1080/[project_name]/[sha1_version] --data-binary @docker-compose.yml
+curl -X POST http://localhost:1080/[project_name]/ --data-binary @docker-compose.yml
 ```
 
 We recommend putting an `Authorization` in front of your server (e.g. reverse-proxy, nginx, etc) if you plan to expose it to the internet.
@@ -77,4 +76,5 @@ Usage of deploy:
 ```
 
 ## License
+
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_large)
