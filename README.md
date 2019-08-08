@@ -5,7 +5,7 @@
 [![codecov](https://codecov.io/gh/ViBiOh/deploy/branch/master/graph/badge.svg)](https://codecov.io/gh/ViBiOh/deploy)
 [![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_shield)
 
-Zero-downtime docker-compose deploy
+docker-compose deploy API
 
 ```bash
 curl -O https://raw.githubusercontent.com/ViBiOh/deploy/master/deploy.sh
