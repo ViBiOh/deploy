@@ -7,7 +7,6 @@ import (
 	"github.com/ViBiOh/deploy/pkg/api"
 	httputils "github.com/ViBiOh/httputils/pkg"
 	"github.com/ViBiOh/httputils/pkg/alcotest"
-	"github.com/ViBiOh/httputils/pkg/gzip"
 	"github.com/ViBiOh/httputils/pkg/logger"
 	"github.com/ViBiOh/httputils/pkg/opentracing"
 	"github.com/ViBiOh/httputils/pkg/owasp"
@@ -36,13 +35,12 @@ func main() {
 
 	prometheusApp := prometheus.New(prometheusConfig)
 	opentracingApp := opentracing.New(opentracingConfig)
-	gzipApp := gzip.New()
 	owaspApp := owasp.New(owaspConfig)
 
 	mailerApp := client.New(mailerConfig)
 	apiApp := api.New(apiConfig, mailerApp)
 
-	handler := httputils.ChainMiddlewares(apiApp.Handler(), prometheusApp, opentracingApp, gzipApp, owaspApp)
+	handler := httputils.ChainMiddlewares(apiApp.Handler(), prometheusApp, opentracingApp, owaspApp)
 
 	serverApp.ListenAndServe(handler, httputils.HealthHandler(nil), nil)
 }
