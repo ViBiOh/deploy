@@ -3,12 +3,12 @@
 set -o nounset -o pipefail -o errexit
 readonly SCRIPT_DIR="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
 
-readonly OUTPUT_TXT="coverage.txt"
-readonly COVER_OUTPUT="profile.out"
-readonly COVER_MODE="atomic"
-readonly MODE="mode: ${COVER_MODE}"
-
 main() {
+  local OUTPUT_TXT="coverage.txt"
+  local COVER_OUTPUT="profile.out"
+  local COVER_MODE="atomic"
+  local MODE="mode: ${COVER_MODE}"
+
   pushd "${SCRIPT_DIR}/../"
 
   echo "${MODE}" > "${OUTPUT_TXT}"
