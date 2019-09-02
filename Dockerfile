@@ -6,7 +6,7 @@ COPY . .
 RUN make
 
 ARG CODECOV_TOKEN
-RUN curl -s https://codecov.io/bash | bash
+RUN curl -q -sS https://codecov.io/bash | bash
 
 FROM docker/compose:1.24.1
 
