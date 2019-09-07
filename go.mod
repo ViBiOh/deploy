@@ -1,8 +1,8 @@
 module github.com/ViBiOh/deploy
 
-go 1.12
+go 1.13
 
 require (
-	github.com/ViBiOh/httputils v1.6.5
-	github.com/ViBiOh/mailer v1.1.1
+	github.com/ViBiOh/httputils v1.6.6
+	github.com/ViBiOh/mailer v1.1.2
 )
