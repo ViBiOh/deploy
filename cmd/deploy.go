@@ -30,9 +30,6 @@ func main() {
 
 	alcotest.DoAndExit(alcotestConfig)
 
-	serverApp, err := httputils.New(serverConfig)
-	logger.Fatal(err)
-
 	prometheusApp := prometheus.New(prometheusConfig)
 	opentracingApp := opentracing.New(opentracingConfig)
 	owaspApp := owasp.New(owaspConfig)
@@ -42,5 +39,5 @@ func main() {
 
 	handler := httputils.ChainMiddlewares(apiApp.Handler(), prometheusApp, opentracingApp, owaspApp)
 
-	serverApp.ListenAndServe(handler, httputils.HealthHandler(nil), nil)
+	httputils.New(serverConfig).ListenAndServe(handler, httputils.HealthHandler(nil), nil)
 }
