@@ -37,6 +37,8 @@ If something goes wrong during the deploy process, the uploaded `docker-compose.
 
 ```bash
 Usage of deploy:
+  -address string
+        [http] Listen address
   -apiNotification string
         [api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all') (default "onError")
   -apiNotificationEmail string
