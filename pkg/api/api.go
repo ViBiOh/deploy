@@ -12,10 +12,10 @@ import (
 	"path"
 	"strings"
 
-	"github.com/ViBiOh/httputils/pkg/errors"
-	"github.com/ViBiOh/httputils/pkg/httperror"
-	"github.com/ViBiOh/httputils/pkg/logger"
-	"github.com/ViBiOh/httputils/pkg/tools"
+	"github.com/ViBiOh/httputils/v2/pkg/errors"
+	"github.com/ViBiOh/httputils/v2/pkg/httperror"
+	"github.com/ViBiOh/httputils/v2/pkg/logger"
+	"github.com/ViBiOh/httputils/v2/pkg/tools"
 	"github.com/ViBiOh/mailer/pkg/client"
 )
 
@@ -38,9 +38,9 @@ type App struct {
 // Flags adds flags for configuring package
 func Flags(fs *flag.FlagSet, prefix string) Config {
 	return Config{
-		tempFolder:        fs.String(tools.ToCamel(fmt.Sprintf("%sTempFolder", prefix)), "/tmp", "[api] Temp folder for uploading files"),
-		notification:      fs.String(tools.ToCamel(fmt.Sprintf("%sNotification", prefix)), "onError", "[api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')"),
-		notificationEmail: fs.String(tools.ToCamel(fmt.Sprintf("%sNotificationEmail", prefix)), "", "[api] Email address to notify"),
+		tempFolder:        tools.NewFlag(prefix, "deploy").Name("TempFolder").Default("/tmp").Label("Temp folder for uploading files").ToString(fs),
+		notification:      tools.NewFlag(prefix, "deploy").Name("Notification").Default("onError").Label("Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')").ToString(fs),
+		notificationEmail: tools.NewFlag(prefix, "deploy").Name("NotificationEmail").Default("").Label("Email address to notify").ToString(fs),
 	}
 }
 
