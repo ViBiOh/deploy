@@ -38,41 +38,41 @@ If something goes wrong during the deploy process, the uploaded `docker-compose.
 ```bash
 Usage of deploy:
   -address string
-        [http] Listen address
+        [http] Listen address {DEPLOY_ADDRESS}
   -apiNotification string
-        [api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all') (default "onError")
+        [api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all') {DEPLOY_API_NOTIFICATION} (default "onError")
   -apiNotificationEmail string
-        [api] Email address to notify
+        [api] Email address to notify {DEPLOY_API_NOTIFICATION_EMAIL}
   -apiTempFolder string
-        [api] Temp folder for uploading files (default "/tmp")
+        [api] Temp folder for uploading files {DEPLOY_API_TEMP_FOLDER} (default "/tmp")
   -cert string
-        [http] Certificate file
+        [http] Certificate file {DEPLOY_CERT}
   -csp string
-        [owasp] Content-Security-Policy (default "default-src 'self'; base-uri 'self'")
+        [owasp] Content-Security-Policy {DEPLOY_CSP} (default "default-src 'self'; base-uri 'self'")
   -frameOptions string
-        [owasp] X-Frame-Options (default "deny")
+        [owasp] X-Frame-Options {DEPLOY_FRAME_OPTIONS} (default "deny")
   -hsts
-        [owasp] Indicate Strict Transport Security (default true)
+        [owasp] Indicate Strict Transport Security {DEPLOY_HSTS} (default true)
   -key string
-        [http] Key file
+        [http] Key file {DEPLOY_KEY}
   -mailerPass string
-        [mailer] Mailer Pass
+        [mailer] Mailer Pass {DEPLOY_MAILER_PASS}
   -mailerURL string
-        [mailer] Mailer URL (default "https://mailer.vibioh.fr")
+        [mailer] Mailer URL {DEPLOY_MAILER_URL} (default "https://mailer.vibioh.fr")
   -mailerUser string
-        [mailer] Mailer User
+        [mailer] Mailer User {DEPLOY_MAILER_USER}
   -port int
-        [http] Listen port (default 1080)
+        [http] Listen port {DEPLOY_PORT} (default 1080)
   -prometheusPath string
-        [prometheus] Path for exposing metrics (default "/metrics")
+        [prometheus] Path for exposing metrics {DEPLOY_PROMETHEUS_PATH} (default "/metrics")
   -tracingAgent string
-        [tracing] Jaeger Agent (e.g. host:port) (default "jaeger:6831")
+        [tracing] Jaeger Agent (e.g. host:port) {DEPLOY_TRACING_AGENT} (default "jaeger:6831")
   -tracingName string
-        [tracing] Service name
+        [tracing] Service name {DEPLOY_TRACING_NAME}
   -url string
-        [alcotest] URL to check
+        [alcotest] URL to check {DEPLOY_URL}
   -userAgent string
-        [alcotest] User-Agent for check (default "Golang alcotest")
+        [alcotest] User-Agent for check {DEPLOY_USER_AGENT} (default "Golang alcotest")
 ```
 
 ## License
