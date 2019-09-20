@@ -3,13 +3,6 @@ version: '2'
 services:
   api:
     image: vibioh/deploy
-    command:
-    - -mailerUser
-    - ${MAILER_USER}
-    - -mailerPass
-    - ${MAILER_PASS}
-    - -apiNotificationEmail
-    - ${NOTIFY_EMAIL}
     labels:
       traefik.http.routers.deploy-http.rule: Host(`deploy.vibioh.fr`)
       traefik.http.routers.deploy-http.entrypoints: http
@@ -21,7 +14,12 @@ services:
       traefik.http.routers.deploy-https.tls.certResolver: default
       traefik.http.services.deploy-service.loadbalancer.passhostheader: true
       traefik.http.services.deploy-service.loadbalancer.server.port: '1080'
+      traefik.http.middlewares.deploy-auth.basicAuth.removeHeader: true
       traefik.http.middlewares.deploy-auth.basicAuth.users: '${BASIC_USERS}'
+    environment:
+      DEPLOY_MAILER_USER: ${MAILER_USER}
+      DEPLOY_MAILER_PASS: ${MAILER_PASS}
+      DEPLOY_API_NOTIFICATION_EMAIL: ${NOTIFY_EMAIL}
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: on-failure:5
