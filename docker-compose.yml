@@ -11,11 +11,11 @@ services:
       traefik.http.routers.deploy-https.entrypoints: https
       traefik.http.routers.deploy-https.middlewares: compress@file, web-limit@file, deploy-auth
       traefik.http.routers.deploy-https.tls: true
-      traefik.http.routers.deploy-https.tls.certResolver: default
+      traefik.http.routers.deploy-https.tls.certresolver: default
       traefik.http.services.deploy-service.loadbalancer.passhostheader: true
       traefik.http.services.deploy-service.loadbalancer.server.port: '1080'
-      traefik.http.middlewares.deploy-auth.basicAuth.removeHeader: true
-      traefik.http.middlewares.deploy-auth.basicAuth.users: '${BASIC_USERS}'
+      traefik.http.middlewares.deploy-auth.basicauth.removeheader: true
+      traefik.http.middlewares.deploy-auth.basicauth.users: '${BASIC_USERS}'
     environment:
       DEPLOY_MAILER_USER: ${MAILER_USER}
       DEPLOY_MAILER_PASS: ${MAILER_PASS}
