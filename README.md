@@ -56,11 +56,11 @@ Usage of deploy:
   -key string
         [http] Key file {DEPLOY_KEY}
   -mailerPass string
-        [mailer] Mailer Pass {DEPLOY_MAILER_PASS}
+        [mailer] Pass {DEPLOY_MAILER_PASS}
   -mailerURL string
-        [mailer] Mailer URL {DEPLOY_MAILER_URL} (default "https://mailer.vibioh.fr")
+        [mailer] URL (an instance of github.com/ViBiOh/mailer) {DEPLOY_MAILER_URL}
   -mailerUser string
-        [mailer] Mailer User {DEPLOY_MAILER_USER}
+        [mailer] User {DEPLOY_MAILER_USER}
   -port int
         [http] Listen port {DEPLOY_PORT} (default 1080)
   -prometheusPath string

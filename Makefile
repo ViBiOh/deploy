@@ -35,6 +35,11 @@ name:
 version:
 	@echo -n $(shell git rev-parse --short HEAD)
 
+## config: Confiure dev environment
+.PHONY: config
+config:
+	./script/install_hooks
+
 ## app: Build app with dependencies download
 .PHONY: app
 app: deps go

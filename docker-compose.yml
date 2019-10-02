@@ -16,6 +16,7 @@ services:
       traefik.http.middlewares.deploy-auth.basicauth.removeheader: true
       traefik.http.middlewares.deploy-auth.basicauth.users: '${BASIC_USERS}'
     environment:
+      DEPLOY_MAILER_URL: ${MAILER_URL}
       DEPLOY_MAILER_USER: ${MAILER_USER}
       DEPLOY_MAILER_PASS: ${MAILER_PASS}
       DEPLOY_API_NOTIFICATION_EMAIL: ${NOTIFY_EMAIL}
