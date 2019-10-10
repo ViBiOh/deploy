@@ -1,4 +1,4 @@
-version: '2'
+version: "2"
 
 services:
   api:
@@ -12,19 +12,19 @@ services:
       traefik.http.routers.deploy-https.middlewares: compress@file, web-limit@file, deploy-auth
       traefik.http.routers.deploy-https.tls: true
       traefik.http.routers.deploy-https.tls.certresolver: default
-      traefik.http.services.deploy-service.loadbalancer.server.port: '1080'
-      traefik.http.middlewares.deploy-auth.basicauth.removeheader: true
-      traefik.http.middlewares.deploy-auth.basicauth.users: '${BASIC_USERS}'
+      traefik.http.services.deploy-service.loadbalancer.server.port: "1080"
+      traefik.http.middlewares.deploy-auth.basicauth.removeheader: "true"
+      traefik.http.middlewares.deploy-auth.basicauth.users: "${BASIC_USERS}"
     environment:
-      DEPLOY_MAILER_URL: ${MAILER_URL}
-      DEPLOY_MAILER_USER: ${MAILER_USER}
-      DEPLOY_MAILER_PASS: ${MAILER_PASS}
-      DEPLOY_API_NOTIFICATION_EMAIL: ${NOTIFY_EMAIL}
+      DEPLOY_MAILER_URL: "${MAILER_URL}"
+      DEPLOY_MAILER_USER: "${MAILER_USER}"
+      DEPLOY_MAILER_PASS: "${MAILER_PASS}"
+      DEPLOY_API_NOTIFICATION_EMAIL: "${NOTIFY_EMAIL}"
     volumes:
     - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: on-failure:5
     cpu_shares: 128
     mem_limit: 201326592
-    user: '0'
+    user: "0"
     security_opt:
     - no-new-privileges
