@@ -46,8 +46,11 @@ build() {
     return 1
   fi
 
-  for os_arch in "${TARGETS[@]}"; do
-    IFS='/' read -ra context <<< "${os_arch}"
+  local BLUE='\033[0;34m'
+  local RESET='\033[0m'
+
+  for OS_ARCH in "${TARGETS[@]}"; do
+    IFS='/' read -ra context <<< "${OS_ARCH}"
 
     local GOOS="${context[0]}"
     local GOARCH="${context[1]}"
@@ -56,6 +59,7 @@ build() {
       export GOOS="${GOOS}"
       export GOARCH="${GOARCH}"
       export CGO_ENABLED=0
+      echo -e "${BLUE}Building binary for ${GOOS}/${GOARCH} to ${OUTPUT_DIR}${RESET}"
       go build -ldflags="-s -w" -installsuffix nocgo -o "${OUTPUT_DIR}/${1}_${GOOS}_${GOARCH}" "${SCRIPT_DIR}/../${2}"
     )
   done
@@ -75,11 +79,10 @@ get_release_body() {
 
 release() {
   local GITHUB_REPOSITORY
-  local GIT_TAG
-  local RELEASE_NAME
-
   GITHUB_REPOSITORY="$(get_github_repository)"
+  local GIT_TAG
   GIT_TAG="$(get_last_tag)"
+  local RELEASE_NAME
   RELEASE_NAME="${GIT_TAG}"
 
   read_variable_if_required GITHUB_OAUTH_TOKEN
