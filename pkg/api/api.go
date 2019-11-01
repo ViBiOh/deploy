@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"errors"
 	"flag"
 	"fmt"
 	"io"
@@ -12,10 +13,9 @@ import (
 	"path"
 	"strings"
 
-	"github.com/ViBiOh/httputils/v2/pkg/errors"
-	"github.com/ViBiOh/httputils/v2/pkg/httperror"
-	"github.com/ViBiOh/httputils/v2/pkg/logger"
-	"github.com/ViBiOh/httputils/v2/pkg/tools"
+	"github.com/ViBiOh/httputils/v3/pkg/flags"
+	"github.com/ViBiOh/httputils/v3/pkg/httperror"
+	"github.com/ViBiOh/httputils/v3/pkg/logger"
 	"github.com/ViBiOh/mailer/pkg/client"
 )
 
@@ -38,9 +38,9 @@ type App struct {
 // Flags adds flags for configuring package
 func Flags(fs *flag.FlagSet, prefix string) Config {
 	return Config{
-		tempFolder:        tools.NewFlag(prefix, "deploy").Name("TempFolder").Default("/tmp").Label("Temp folder for uploading files").ToString(fs),
-		notification:      tools.NewFlag(prefix, "deploy").Name("Notification").Default("onError").Label("Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')").ToString(fs),
-		notificationEmail: tools.NewFlag(prefix, "deploy").Name("NotificationEmail").Default("").Label("Email address to notify").ToString(fs),
+		tempFolder:        flags.New(prefix, "deploy").Name("TempFolder").Default("/tmp").Label("Temp folder for uploading files").ToString(fs),
+		notification:      flags.New(prefix, "deploy").Name("Notification").Default("onError").Label("Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')").ToString(fs),
+		notificationEmail: flags.New(prefix, "deploy").Name("NotificationEmail").Default("").Label("Email address to notify").ToString(fs),
 	}
 }
 
@@ -82,12 +82,12 @@ func (a App) Handler() http.Handler {
 		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s.yml", project))
 		uploadFile, err := os.Create(composeFilename)
 		if err != nil {
-			httperror.InternalServerError(w, errors.WithStack(err))
+			httperror.InternalServerError(w, err)
 			return
 		}
 
 		if _, err := io.Copy(uploadFile, r.Body); err != nil {
-			httperror.InternalServerError(w, errors.WithStack(err))
+			httperror.InternalServerError(w, err)
 			return
 		}
 
@@ -101,18 +101,18 @@ func (a App) Handler() http.Handler {
 		if err != nil {
 			w.WriteHeader(http.StatusInternalServerError)
 		} else if removeErr := os.Remove(composeFilename); removeErr != nil {
-			logger.Error("%+s", errors.WithStack(removeErr))
+			logger.Error("%s", removeErr)
 		}
 
 		output := out.Bytes()
 		logger.Info("%s", output)
 
 		if err := a.sendEmailNotification(context.Background(), project, output, err == nil); err != nil {
-			logger.Error("%+s", err)
+			logger.Error("%s", err)
 		}
 
 		if _, err := w.Write(output); err != nil {
-			httperror.InternalServerError(w, errors.WithStack(err))
+			httperror.InternalServerError(w, err)
 		}
 
 	})
