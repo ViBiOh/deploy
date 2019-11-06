@@ -22,4 +22,4 @@ ARG APP_VERSION
 ENV VERSION=${APP_VERSION}
 
 COPY --from=builder /app/bin/deploy /
-COPY deploy.sh /deploy.sh
+COPY deploy /deploy

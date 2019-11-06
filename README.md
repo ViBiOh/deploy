@@ -9,10 +9,10 @@
 docker-compose deploy API
 
 ```bash
-curl -O https://raw.githubusercontent.com/ViBiOh/deploy/master/deploy.sh
-chmod +x deploy.sh
+curl -O https://raw.githubusercontent.com/ViBiOh/deploy/master/deploy
+chmod +x deploy
 
-./deploy.sh PROJECT_NAME DOCKER-COMPOSE-FILE
+./deploy PROJECT_NAME DOCKER-COMPOSE-FILE
 ```
 
 ```bash
@@ -24,7 +24,7 @@ Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]
 
 ## Golang API
 
-You can execute the `deploy.sh` script through HTTP API.
+You can execute the `deploy` script through HTTP API.
 
 ```bash
 curl -X POST http://localhost:1080/[project_name]/ --data-binary @docker-compose.yml

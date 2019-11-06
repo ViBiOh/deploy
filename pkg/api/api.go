@@ -91,7 +91,7 @@ func (a App) Handler() http.Handler {
 			return
 		}
 
-		cmd := exec.Command("./deploy.sh", project, composeFilename)
+		cmd := exec.Command("./deploy", project, composeFilename)
 
 		var out bytes.Buffer
 		cmd.Stdout = &out
