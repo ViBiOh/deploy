@@ -8,7 +8,7 @@ RUN make \
  && git diff --quiet -- *.go
 
 ARG CODECOV_TOKEN
-RUN curl -sSqL --max-time 10 https://codecov.io/bash | bash
+RUN curl -q -sSL --max-time 10 https://codecov.io/bash | bash
 
 FROM docker/compose:1.24.1
 
