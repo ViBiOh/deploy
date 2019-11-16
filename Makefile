@@ -11,7 +11,7 @@ GO_FILES ?= $(shell find . -name "*.go")
 
 BINARY_PATH=bin/$(APP_NAME)
 
-MAIN_SOURCE = cmd/deploy.go
+MAIN_SOURCE = cmd/deploy/deploy.go
 MAIN_RUNNER = go run $(MAIN_SOURCE)
 ifeq ($(DEBUG), true)
 	MAIN_RUNNER = dlv debug $(MAIN_SOURCE) --
@@ -45,7 +45,7 @@ app: init dev
 ## init: Download dependencies
 .PHONY: init
 init:
-	@curl -q -sSL --max-time 10 "https://raw.githubusercontent.com/ViBiOh/scripts/master/bootstrap" | bash -s "git_hooks" "coverage"
+	@curl -q -sSL --max-time 10 "https://raw.githubusercontent.com/ViBiOh/scripts/master/bootstrap" | bash -s "git_hooks" "coverage" "release"
 	go get github.com/kisielk/errcheck
 	go get golang.org/x/lint/golint
 	go get golang.org/x/tools/cmd/goimports

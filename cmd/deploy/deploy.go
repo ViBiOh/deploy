@@ -5,8 +5,8 @@ import (
 	"os"
 
 	"github.com/ViBiOh/deploy/pkg/api"
-	httputils "github.com/ViBiOh/httputils/v3/pkg"
 	"github.com/ViBiOh/httputils/v3/pkg/alcotest"
+	"github.com/ViBiOh/httputils/v3/pkg/httputils"
 	"github.com/ViBiOh/httputils/v3/pkg/logger"
 	"github.com/ViBiOh/httputils/v3/pkg/owasp"
 	"github.com/ViBiOh/httputils/v3/pkg/prometheus"
@@ -28,13 +28,11 @@ func main() {
 
 	alcotest.DoAndExit(alcotestConfig)
 
-	prometheusApp := prometheus.New(prometheusConfig)
-	owaspApp := owasp.New(owaspConfig)
-
 	mailerApp := client.New(mailerConfig)
 	apiApp := api.New(apiConfig, mailerApp)
 
-	handler := httputils.ChainMiddlewares(apiApp.Handler(), prometheusApp, owaspApp)
-
-	httputils.New(serverConfig).ListenAndServe(handler, httputils.HealthHandler(nil), nil)
+	server := httputils.New(serverConfig)
+	server.Middleware(prometheus.New(prometheusConfig))
+	server.Middleware(owasp.New(owaspConfig))
+	server.ListenServeWait(apiApp.Handler())
 }

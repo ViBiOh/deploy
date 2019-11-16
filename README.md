@@ -69,7 +69,7 @@ Usage of deploy:
   -url string
         [alcotest] URL to check {DEPLOY_URL}
   -userAgent string
-        [alcotest] User-Agent for check {DEPLOY_USER_AGENT} (default "Golang alcotest")
+        [alcotest] User-Agent for check {DEPLOY_USER_AGENT} (default "Alcotest")
 ```
 
 ## License
