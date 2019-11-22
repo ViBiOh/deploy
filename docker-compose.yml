@@ -23,7 +23,7 @@ services:
       DEPLOY_MAILER_PASS: "${MAILER_PASS}"
       DEPLOY_API_NOTIFICATION_EMAIL: "${NOTIFY_EMAIL}"
     volumes:
-    - /var/run/docker.sock:/var/run/docker.sock:ro
+      - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: on-failure:5
     cpu_shares: 128
     mem_limit: 201326592
