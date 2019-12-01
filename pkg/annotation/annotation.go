@@ -28,8 +28,8 @@ type app struct {
 }
 
 type annotationPayload struct {
-	text string
-	tags []string
+	Text string
+	Tags []string
 }
 
 // Flags adds flags for configuring package
@@ -71,8 +71,8 @@ func (a app) Send(ctx context.Context, text string, tags ...string) error {
 	}
 
 	_, err := req.JSON(ctx, annotationPayload{
-		text: text,
-		tags: tags,
+		Text: text,
+		Tags: tags,
 	})
 
 	return err
