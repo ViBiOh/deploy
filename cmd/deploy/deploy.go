@@ -34,6 +34,8 @@ func main() {
 	annotationApp := annotation.New(annotationConfig)
 	apiApp := api.New(apiConfig, mailerApp, annotationApp)
 
+	go apiApp.Start()
+
 	server := httputils.New(serverConfig)
 	server.Middleware(prometheus.New(prometheusConfig))
 	server.Middleware(owasp.New(owaspConfig))

@@ -25,3 +25,4 @@ ENV VERSION=${APP_VERSION}
 
 COPY --from=builder /app/bin/deploy /
 COPY deploy /deploy
+COPY clean /clean

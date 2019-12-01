@@ -12,8 +12,10 @@ import (
 	"os/exec"
 	"path"
 	"strings"
+	"time"
 
 	"github.com/ViBiOh/deploy/pkg/annotation"
+	"github.com/ViBiOh/httputils/v3/pkg/cron"
 	"github.com/ViBiOh/httputils/v3/pkg/flags"
 	"github.com/ViBiOh/httputils/v3/pkg/httperror"
 	"github.com/ViBiOh/httputils/v3/pkg/logger"
@@ -22,6 +24,7 @@ import (
 
 // App of package
 type App interface {
+	Start()
 	Handler() http.Handler
 }
 
@@ -70,6 +73,23 @@ func validateRequest(r *http.Request) (project string, err error) {
 	}
 
 	return
+}
+
+func (a app) Start() {
+	cron.New().Days().At("06:00").In("Europe/Paris").Start(func(_ time.Time) error {
+		cmd := exec.Command("./clean")
+
+		var out bytes.Buffer
+		cmd.Stdout = &out
+		cmd.Stderr = &out
+
+		err := cmd.Run()
+		logger.Info("%s", out.Bytes())
+
+		return err
+	}, func(err error) {
+		logger.Error("%s", err)
+	})
 }
 
 // Handler for request. Should be use with net/http
