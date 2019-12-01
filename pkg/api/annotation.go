@@ -13,5 +13,5 @@ func (a app) sendAnnotation(ctx context.Context, project string, success bool) e
 		text += " failed"
 	}
 
-	return a.annotationApp.Send(ctx, text, "deploy", "project")
+	return a.annotationApp.Send(ctx, text, "deploy", project)
 }
