@@ -58,7 +58,7 @@ func formatLines(output []byte) []outputLine {
 	return outputLines
 }
 
-func (a *App) sendEmailNotification(ctx context.Context, project string, output []byte, success bool) error {
+func (a app) sendEmailNotification(ctx context.Context, project string, output []byte, success bool) error {
 	if a.notification == never || (success && a.notification == onError) {
 		return nil
 	}

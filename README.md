@@ -40,6 +40,12 @@ If something goes wrong during the deploy process, the uploaded `docker-compose.
 Usage of deploy:
   -address string
         [http] Listen address {DEPLOY_ADDRESS}
+  -annotationPass string
+        [annotation] Pass {DEPLOY_ANNOTATION_PASS}
+  -annotationURL string
+        [annotation] URL of Annotation server (e.g. my.grafana.com/api/annotation) {DEPLOY_ANNOTATION_URL}
+  -annotationUser string
+        [annotation] User {DEPLOY_ANNOTATION_USER}
   -apiNotification string
         [api] Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all') {DEPLOY_API_NOTIFICATION} (default "onError")
   -apiNotificationEmail string
