@@ -4,5 +4,5 @@ go 1.13
 
 require (
 	github.com/ViBiOh/httputils/v3 v3.3.0
-	github.com/ViBiOh/mailer v1.6.0
+	github.com/ViBiOh/mailer v1.6.1
 )
