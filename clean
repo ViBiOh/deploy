@@ -1,11 +1,12 @@
 #!/usr/bin/env bash
 
-set -o nounset -o pipefail -o errexit
+set -o nounset -o pipefail
 
 clean() {
   docker rmi $(docker images -q)
   docker network rm $(docker network ls -q)
   docker volume rm $(docker volume ls -q)
+  docker system prune -f
 }
 
 clean
