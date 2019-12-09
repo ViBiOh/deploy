@@ -7,6 +7,8 @@ github.com/ViBiOh/httputils/v3 v3.2.3 h1:Ga4fc4CYaaQzw6kb+P+nBwzBizJBAqZvfugyKwy
 github.com/ViBiOh/httputils/v3 v3.2.3/go.mod h1:GQ2Eu+PfaYnDeSx0Mqvb28w0sB7/cUOpfdivtIDL87Q=
 github.com/ViBiOh/httputils/v3 v3.3.0 h1:5ILMB0CozlE3xH/iJj3/nbfP8uw0GpYYu9+8tnien2Q=
 github.com/ViBiOh/httputils/v3 v3.3.0/go.mod h1:L2S1E8HtDtf9LuuAkQkRwwDqwO1zq5vayWB3hQON87Y=
+github.com/ViBiOh/httputils/v3 v3.4.0 h1:OsXao2crued3zFwLsYfIhq6OshzrcDfseOLlE7lpehk=
+github.com/ViBiOh/httputils/v3 v3.4.0/go.mod h1:L2S1E8HtDtf9LuuAkQkRwwDqwO1zq5vayWB3hQON87Y=
 github.com/ViBiOh/mailer v1.6.0 h1:RDhQ6p0GigLngMQhm65Tw5pmHd6lBJNpK3/Hn96Zu44=
 github.com/ViBiOh/mailer v1.6.0/go.mod h1:cROPaf60eBHAfBbVnHOpBxWATJIBdsQMLW3+eFwwngM=
 github.com/ViBiOh/mailer v1.6.1 h1:qfJNG6HJ24Ox4mOmtdMGaIQ+7pb6+GhUEgpgu1JiC/M=
