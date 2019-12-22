@@ -34,7 +34,7 @@ We recommend putting an `Authorization` in front of your server (e.g. reverse-pr
 
 If something goes wrong during the deploy process, the uploaded `docker-compose.yml` is kept in order to manually retry or debug what's going on. Otherwise, the file is deleted.
 
-### CLI og HTTP Server
+### CLI of HTTP Server
 
 ```bash
 Usage of deploy:
@@ -68,7 +68,9 @@ Usage of deploy:
         [mailer] URL (an instance of github.com/ViBiOh/mailer) {DEPLOY_MAILER_URL}
   -mailerUser string
         [mailer] User {DEPLOY_MAILER_USER}
-  -port int
+  -okStatus int
+        [http] Healthy HTTP Status code {DEPLOY_OK_STATUS} (default 204)
+  -port uint
         [http] Listen port {DEPLOY_PORT} (default 1080)
   -prometheusPath string
         [prometheus] Path for exposing metrics {DEPLOY_PROMETHEUS_PATH} (default "/metrics")

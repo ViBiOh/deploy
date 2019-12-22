@@ -37,7 +37,7 @@ func main() {
 	go apiApp.Start()
 
 	server := httputils.New(serverConfig)
-	server.Middleware(prometheus.New(prometheusConfig))
-	server.Middleware(owasp.New(owaspConfig))
+	server.Middleware(prometheus.New(prometheusConfig).Middleware)
+	server.Middleware(owasp.New(owaspConfig).Middleware)
 	server.ListenServeWait(apiApp.Handler())
 }
