@@ -4,7 +4,7 @@ version: "2"
 
 services:
   api:
-    image: vibioh/deploy
+    image: ${DOCKER_USER}/deploy
     labels:
       traefik.http.routers.deploy-http.rule: Host(`deploy.vibioh.fr`)
       traefik.http.routers.deploy-http.entrypoints: http
