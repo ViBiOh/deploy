@@ -3,6 +3,8 @@ github.com/ViBiOh/httputils/v3 v3.7.0 h1:Em1/FK/dJlA+lAjyRzOIXqrbe9C7spWmXPyeQYQ
 github.com/ViBiOh/httputils/v3 v3.7.0/go.mod h1:ebC0FwtuUkNTlhh2g/NxhHZBGeHYefsBNCFy/wQa6PM=
 github.com/ViBiOh/httputils/v3 v3.7.1 h1:E+eGwje8/I3r7/HFZienDLlxRXiz/msrkIkqUO9vX+Q=
 github.com/ViBiOh/httputils/v3 v3.7.1/go.mod h1:yOu5e4BzPMl7jjXOSf0nKYsHq9AJCY455yDcLlPjV7U=
+github.com/ViBiOh/httputils/v3 v3.8.3 h1:/nECPiYtHwuf1qqsv+B63ZWZfSgXRtcW/9HQJlsKanc=
+github.com/ViBiOh/httputils/v3 v3.8.3/go.mod h1:yOu5e4BzPMl7jjXOSf0nKYsHq9AJCY455yDcLlPjV7U=
 github.com/ViBiOh/mailer v1.6.2 h1:2YcvogQJzK/c4fb7QREkgUBuesRPCNNLJOXpPGSAU/M=
 github.com/ViBiOh/mailer v1.6.2/go.mod h1:p5abh0EIKE4Oerxe2p3xRBy00euvKhrX00YYnCrz2OA=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
