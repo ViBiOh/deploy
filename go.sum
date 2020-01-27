@@ -1,5 +1,8 @@
+github.com/ViBiOh/httputils v1.8.2 h1:ulvdhtq8/Ww4QihYJ5uf0WDTG42yPuwojUCbfv/9W2E=
 github.com/ViBiOh/httputils/v3 v3.8.3 h1:/nECPiYtHwuf1qqsv+B63ZWZfSgXRtcW/9HQJlsKanc=
 github.com/ViBiOh/httputils/v3 v3.8.3/go.mod h1:yOu5e4BzPMl7jjXOSf0nKYsHq9AJCY455yDcLlPjV7U=
+github.com/ViBiOh/httputils/v3 v3.9.0 h1:X6F1Gx3sF36V3tF0LEL/+S851dA/2DL1JD3ZCF19H5k=
+github.com/ViBiOh/httputils/v3 v3.9.0/go.mod h1:ggnxrfw9YnRPQDUvNP2FEoTuh+lZgAAt81cny8w2l1M=
 github.com/ViBiOh/mailer v1.6.3 h1:FPau3ISU4duB/DDvvfp93s/mXV897VNFxoyZkHy1mug=
 github.com/ViBiOh/mailer v1.6.3/go.mod h1:0LLlT/jx2gYWT355fUU381NFlJ0PyPuIuLoAymm8PfQ=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
@@ -82,6 +85,7 @@ github.com/stretchr/testify v1.3.0/go.mod h1:M5WIy9Dh21IEIfnGCwXGc5bZfKNJtfHm1UV
 github.com/tdewolff/minify/v2 v2.6.1/go.mod h1:l9hbQnH096st77OkscoRUvKdd23oUM6pDZpYx381sPo=
 github.com/tdewolff/minify/v2 v2.6.3 h1:10X11xk41EL2SW073LoBAs4CWNxgTzCIqOhUl1Ig0Vw=
 github.com/tdewolff/minify/v2 v2.6.3/go.mod h1:BkDSm8aMMT0ALGmpt7j3Ra7nLUgZL0qhyrAHXwxcy5w=
+github.com/tdewolff/minify/v2 v2.7.2/go.mod h1:BkDSm8aMMT0ALGmpt7j3Ra7nLUgZL0qhyrAHXwxcy5w=
 github.com/tdewolff/parse/v2 v2.3.14/go.mod h1:+V2lSZ93xpH2Csfs/vtNY1Fjr8kcFMsZKjyLoSkZbM0=
 github.com/tdewolff/parse/v2 v2.4.2 h1:Bu2Qv6wepkc+Ou7iB/qHjAhEImlAP5vedzlQRUdj3BI=
 github.com/tdewolff/parse/v2 v2.4.2/go.mod h1:WzaJpRSbwq++EIQHYIRTpbYKNA3gn9it1Ik++q4zyho=
