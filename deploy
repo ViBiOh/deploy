@@ -21,7 +21,7 @@ deploy() {
 
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" config -q
   docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" pull -q
-  docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" up -d --remove-orphans
+  docker-compose -p "${PROJECT_NAME}" -f "${COMPOSE_FILE}" up -d --remove-orphans --renew-anon-volumes
 
   printf "%bLogs for services of %s%b\n" "${BLUE}" "${PROJECT_NAME}" "${RESET}"
 
