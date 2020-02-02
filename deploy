@@ -9,7 +9,7 @@ deploy() {
   local RESET='\033[0m'
 
   if [[ "${#}" -lt 1 ]]; then
-    printf "%bUsage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]%b" "${RED}" "${RESET}"
+    printf "%bUsage: ${0} [PROJECT_NAME] [DOCKER-COMPOSE-FILE]%b" "${RED}" "${RESET}"
 
     return 1
   fi
