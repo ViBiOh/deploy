@@ -3,6 +3,8 @@ github.com/ViBiOh/httputils/v3 v3.8.3 h1:/nECPiYtHwuf1qqsv+B63ZWZfSgXRtcW/9HQJls
 github.com/ViBiOh/httputils/v3 v3.8.3/go.mod h1:yOu5e4BzPMl7jjXOSf0nKYsHq9AJCY455yDcLlPjV7U=
 github.com/ViBiOh/httputils/v3 v3.9.0 h1:X6F1Gx3sF36V3tF0LEL/+S851dA/2DL1JD3ZCF19H5k=
 github.com/ViBiOh/httputils/v3 v3.9.0/go.mod h1:ggnxrfw9YnRPQDUvNP2FEoTuh+lZgAAt81cny8w2l1M=
+github.com/ViBiOh/httputils/v3 v3.10.0 h1:chnK4wa8UnjeZbAPjyeKMHKoDMbKS3G6kYqmyNkGYkw=
+github.com/ViBiOh/httputils/v3 v3.10.0/go.mod h1:ggnxrfw9YnRPQDUvNP2FEoTuh+lZgAAt81cny8w2l1M=
 github.com/ViBiOh/mailer v1.6.3 h1:FPau3ISU4duB/DDvvfp93s/mXV897VNFxoyZkHy1mug=
 github.com/ViBiOh/mailer v1.6.3/go.mod h1:0LLlT/jx2gYWT355fUU381NFlJ0PyPuIuLoAymm8PfQ=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
