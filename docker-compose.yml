@@ -12,7 +12,7 @@ services:
       traefik.http.routers.deploy-https.rule: Host(`deploy.vibioh.fr`)
       traefik.http.routers.deploy-https.entrypoints: https
       traefik.http.routers.deploy-https.middlewares: compress@file, web-limit@file, deploy-auth
-      traefik.http.routers.deploy-https.tls: true
+      traefik.http.routers.deploy-https.tls: "true"
       traefik.http.routers.deploy-https.tls.certresolver: default
       traefik.http.services.deploy-service.loadbalancer.server.port: "1080"
       traefik.http.middlewares.deploy-auth.basicauth.removeheader: "true"
