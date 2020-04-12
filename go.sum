@@ -9,6 +9,8 @@ github.com/ViBiOh/httputils/v3 v3.11.0 h1:HXtl5bCEQjU7LvNYtKUhjmI7qQCEEGmbhoORh9
 github.com/ViBiOh/httputils/v3 v3.11.0/go.mod h1:AJ2YCjFMMPwElU7m9+6R/4Sob3SWNg3nOrgLNM4q9i8=
 github.com/ViBiOh/httputils/v3 v3.12.0 h1:BhSgGoBAaM1dKvcDp0dRJEmE0FlizTg/uWMfFRZeLqA=
 github.com/ViBiOh/httputils/v3 v3.12.0/go.mod h1:exwp/UNyjMLfZTIl8i7x+AfBc4+9x2ar1VDvV0qWbv0=
+github.com/ViBiOh/httputils/v3 v3.13.0 h1:AMsqtoQREdNeTTJToJyZ6SfmcZyuEN8uhD14Ym7BgtI=
+github.com/ViBiOh/httputils/v3 v3.13.0/go.mod h1:exwp/UNyjMLfZTIl8i7x+AfBc4+9x2ar1VDvV0qWbv0=
 github.com/ViBiOh/mailer v1.6.3 h1:FPau3ISU4duB/DDvvfp93s/mXV897VNFxoyZkHy1mug=
 github.com/ViBiOh/mailer v1.6.3/go.mod h1:0LLlT/jx2gYWT355fUU381NFlJ0PyPuIuLoAymm8PfQ=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
