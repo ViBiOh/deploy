@@ -18,6 +18,8 @@ github.com/ViBiOh/httputils/v3 v3.17.1 h1:Yo1gncmsuAnAJxMqMmoXWKILLnHR7nLJrf9bZ1
 github.com/ViBiOh/httputils/v3 v3.17.1/go.mod h1:XaNCzKOhynf+7U0E0RXrzGLtMkLxpVzrHwa0N1ANTmo=
 github.com/ViBiOh/httputils/v3 v3.18.0 h1:OcUdK2d1oC/qjrCGn4lElMH1zAmwFFzj3oUpjcG0Zvc=
 github.com/ViBiOh/httputils/v3 v3.18.0/go.mod h1:pdjuWUsUok7HrnbqSKGduQ6YnwQiZSYh8MshoytImd8=
+github.com/ViBiOh/httputils/v3 v3.19.2 h1:XYd5w+eZnGTrFX1x87Em4JtSJK9GY4lchF59kyJ9/PQ=
+github.com/ViBiOh/httputils/v3 v3.19.2/go.mod h1:pdjuWUsUok7HrnbqSKGduQ6YnwQiZSYh8MshoytImd8=
 github.com/ViBiOh/mailer v1.6.3 h1:FPau3ISU4duB/DDvvfp93s/mXV897VNFxoyZkHy1mug=
 github.com/ViBiOh/mailer v1.6.3/go.mod h1:0LLlT/jx2gYWT355fUU381NFlJ0PyPuIuLoAymm8PfQ=
 github.com/ViBiOh/mailer v1.7.0 h1:ht6G7eNu/IhIgpqw7R2PHXd8l4IIPxX6gekKIfK6V+Q=
