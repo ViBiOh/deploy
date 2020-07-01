@@ -10,7 +10,7 @@ RUN make \
 ARG CODECOV_TOKEN
 RUN curl -q -sSL --max-time 10 https://codecov.io/bash | bash
 
-FROM docker/compose:1.25.5
+FROM docker/compose:1.26.1
 
 EXPOSE 1080
 
