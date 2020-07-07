@@ -17,7 +17,6 @@ type outputLine struct {
 const (
 	never   = "never"
 	onError = "onError"
-	all     = "all"
 )
 
 var (
