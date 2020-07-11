@@ -35,7 +35,7 @@ type annotationPayload struct {
 // Flags adds flags for configuring package
 func Flags(fs *flag.FlagSet, prefix string) Config {
 	return Config{
-		url:  flags.New(prefix, "annotation").Name("URL").Default("").Label("URL of Annotation server (e.g. my.grafana.com/api/annotation)").ToString(fs),
+		url:  flags.New(prefix, "annotation").Name("URL").Default("").Label("URL of Annotation server (e.g. my.grafana.com/api/annotations)").ToString(fs),
 		user: flags.New(prefix, "annotation").Name("User").Default("").Label("User").ToString(fs),
 		pass: flags.New(prefix, "annotation").Name("Pass").Default("").Label("Pass").ToString(fs),
 	}

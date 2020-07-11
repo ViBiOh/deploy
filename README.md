@@ -43,7 +43,7 @@ Usage of deploy:
   -annotationPass string
         [annotation] Pass {DEPLOY_ANNOTATION_PASS}
   -annotationURL string
-        [annotation] URL of Annotation server (e.g. my.grafana.com/api/annotation) {DEPLOY_ANNOTATION_URL}
+        [annotation] URL of Annotation server (e.g. my.grafana.com/api/annotations) {DEPLOY_ANNOTATION_URL}
   -annotationUser string
         [annotation] User {DEPLOY_ANNOTATION_USER}
   -apiNotification string
@@ -58,6 +58,8 @@ Usage of deploy:
         [owasp] Content-Security-Policy {DEPLOY_CSP} (default "default-src 'self'; base-uri 'self'")
   -frameOptions string
         [owasp] X-Frame-Options {DEPLOY_FRAME_OPTIONS} (default "deny")
+  -graceDuration string
+        [http] Grace duration when SIGTERM received {DEPLOY_GRACE_DURATION} (default "15s")
   -hsts
         [owasp] Indicate Strict Transport Security {DEPLOY_HSTS} (default true)
   -key string
