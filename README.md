@@ -64,6 +64,16 @@ Usage of deploy:
         [owasp] Indicate Strict Transport Security {DEPLOY_HSTS} (default true)
   -key string
         [http] Key file {DEPLOY_KEY}
+  -loggerJson
+        [logger] Log format as JSON {DEPLOY_LOGGER_JSON}
+  -loggerLevel string
+        [logger] Logger level {DEPLOY_LOGGER_LEVEL} (default "INFO")
+  -loggerLevelKey string
+        [logger] Key for level in JSON {DEPLOY_LOGGER_LEVEL_KEY} (default "level")
+  -loggerMessageKey string
+        [logger] Key for message in JSON {DEPLOY_LOGGER_MESSAGE_KEY} (default "message")
+  -loggerTimeKey string
+        [logger] Key for timestam in JSON {DEPLOY_LOGGER_TIME_KEY} (default "time")
   -mailerPass string
         [mailer] Pass {DEPLOY_MAILER_PASS}
   -mailerURL string

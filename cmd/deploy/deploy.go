@@ -19,6 +19,7 @@ func main() {
 
 	serverConfig := httputils.Flags(fs, "")
 	alcotestConfig := alcotest.Flags(fs, "")
+	loggerConfig := logger.Flags(fs, "logger")
 	prometheusConfig := prometheus.Flags(fs, "prometheus")
 	owaspConfig := owasp.Flags(fs, "")
 
@@ -29,6 +30,7 @@ func main() {
 	logger.Fatal(fs.Parse(os.Args[1:]))
 
 	alcotest.DoAndExit(alcotestConfig)
+	logger.Global(logger.New(loggerConfig))
 
 	mailerApp := client.New(mailerConfig)
 	annotationApp := annotation.New(annotationConfig)
