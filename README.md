@@ -73,7 +73,7 @@ Usage of deploy:
   -loggerMessageKey string
         [logger] Key for message in JSON {DEPLOY_LOGGER_MESSAGE_KEY} (default "message")
   -loggerTimeKey string
-        [logger] Key for timestam in JSON {DEPLOY_LOGGER_TIME_KEY} (default "time")
+        [logger] Key for timestamp in JSON {DEPLOY_LOGGER_TIME_KEY} (default "time")
   -mailerPass string
         [mailer] Pass {DEPLOY_MAILER_PASS}
   -mailerURL string
