@@ -7,6 +7,8 @@ github.com/ViBiOh/httputils/v3 v3.25.1 h1:SzjVqtqNULy9wyfJYuk1Z7LCCU2PB9b+MpBFXz
 github.com/ViBiOh/httputils/v3 v3.25.1/go.mod h1:KsBEvHr3HAUCV7GwQCP6OdQUJeMP6nnOXLKVS09Pq2U=
 github.com/ViBiOh/mailer v1.8.1 h1:OSiMcl/63E/zdGb+mUBkVu6uSCzONrWYSBg1HAcBQk8=
 github.com/ViBiOh/mailer v1.8.1/go.mod h1:J5JVTHABgIPiqWQmQmIG/RBQek20RJ+YlQKeqoDfZ/E=
+github.com/ViBiOh/mailer v1.8.2 h1:XsmdW9TfaWLu2f4Aj3t3AASlo4e3toN9iBRvz2F7vQg=
+github.com/ViBiOh/mailer v1.8.2/go.mod h1:iEne7pYmFCm4VnIW5wCbxIaRswRhJHEgsYrxOjzc258=
 github.com/alecthomas/template v0.0.0-20160405071501-a0175ee3bccc/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/template v0.0.0-20190718012654-fb15b899a751/go.mod h1:LOuyumcjzFXgccqObfd/Ljyb9UuFJ6TxHnclSeseNhc=
 github.com/alecthomas/units v0.0.0-20151022065526-2efee857e7cf/go.mod h1:ybxpYRFXyAe+OPACYpWeL0wqObRcbAqCMya13uyzqw0=
