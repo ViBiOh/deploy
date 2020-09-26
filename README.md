@@ -59,7 +59,7 @@ Usage of deploy:
   -frameOptions string
         [owasp] X-Frame-Options {DEPLOY_FRAME_OPTIONS} (default "deny")
   -graceDuration string
-        [http] Grace duration when SIGTERM received {DEPLOY_GRACE_DURATION} (default "15s")
+        [http] Grace duration when SIGTERM received {DEPLOY_GRACE_DURATION} (default "30s")
   -hsts
         [owasp] Indicate Strict Transport Security {DEPLOY_HSTS} (default true)
   -key string
