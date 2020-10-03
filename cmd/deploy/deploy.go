@@ -31,6 +31,7 @@ func main() {
 
 	alcotest.DoAndExit(alcotestConfig)
 	logger.Global(logger.New(loggerConfig))
+	defer logger.Close()
 
 	mailerApp := client.New(mailerConfig)
 	annotationApp := annotation.New(annotationConfig)
