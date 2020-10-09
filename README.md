@@ -62,6 +62,8 @@ Usage of deploy:
         [http] Grace duration when SIGTERM received {DEPLOY_GRACE_DURATION} (default "30s")
   -hsts
         [owasp] Indicate Strict Transport Security {DEPLOY_HSTS} (default true)
+  -idleTimeout string
+        [http] Idle Timeout {DEPLOY_IDLE_TIMEOUT} (default "2m")
   -key string
         [http] Key file {DEPLOY_KEY}
   -loggerJson
@@ -86,10 +88,16 @@ Usage of deploy:
         [http] Listen port {DEPLOY_PORT} (default 1080)
   -prometheusPath string
         [prometheus] Path for exposing metrics {DEPLOY_PROMETHEUS_PATH} (default "/metrics")
+  -readTimeout string
+        [http] Read Timeout {DEPLOY_READ_TIMEOUT} (default "5s")
+  -shutdownTimeout string
+        [http] Shutdown Timeout {DEPLOY_SHUTDOWN_TIMEOUT} (default "10s")
   -url string
         [alcotest] URL to check {DEPLOY_URL}
   -userAgent string
         [alcotest] User-Agent for check {DEPLOY_USER_AGENT} (default "Alcotest")
+  -writeTimeout string
+        [http] Write Timeout {DEPLOY_WRITE_TIMEOUT} (default "10s")
 ```
 
 ## License

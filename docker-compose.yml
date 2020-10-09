@@ -24,6 +24,7 @@ services:
       DEPLOY_ANNOTATION_USER: "${ANNOTATION_USER}"
       DEPLOY_ANNOTATION_PASS: "${ANNOTATION_PASS}"
       DEPLOY_API_NOTIFICATION_EMAIL: "${NOTIFY_EMAIL}"
+      DEPLOY_WRITE_TIMEOUT: "2m"
     volumes:
       - /var/run/docker.sock:/var/run/docker.sock:ro
     restart: on-failure:5
