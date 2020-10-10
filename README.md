@@ -97,7 +97,7 @@ Usage of deploy:
   -userAgent string
         [alcotest] User-Agent for check {DEPLOY_USER_AGENT} (default "Alcotest")
   -writeTimeout string
-        [http] Write Timeout {DEPLOY_WRITE_TIMEOUT} (default "10s")
+        [http] Write Timeout {DEPLOY_WRITE_TIMEOUT} (default "2m")
 ```
 
 ## License

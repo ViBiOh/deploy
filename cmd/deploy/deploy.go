@@ -7,6 +7,7 @@ import (
 	"github.com/ViBiOh/deploy/pkg/annotation"
 	"github.com/ViBiOh/deploy/pkg/api"
 	"github.com/ViBiOh/httputils/v3/pkg/alcotest"
+	"github.com/ViBiOh/httputils/v3/pkg/flags"
 	"github.com/ViBiOh/httputils/v3/pkg/httputils"
 	"github.com/ViBiOh/httputils/v3/pkg/logger"
 	"github.com/ViBiOh/httputils/v3/pkg/owasp"
@@ -17,7 +18,7 @@ import (
 func main() {
 	fs := flag.NewFlagSet("deploy", flag.ExitOnError)
 
-	serverConfig := httputils.Flags(fs, "")
+	serverConfig := httputils.Flags(fs, "", flags.NewOverride("WriteTimeout", "2m"))
 	alcotestConfig := alcotest.Flags(fs, "")
 	loggerConfig := logger.Flags(fs, "logger")
 	prometheusConfig := prometheus.Flags(fs, "prometheus")
