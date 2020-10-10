@@ -9,7 +9,6 @@ import (
 	"github.com/ViBiOh/httputils/v3/pkg/alcotest"
 	"github.com/ViBiOh/httputils/v3/pkg/httputils"
 	"github.com/ViBiOh/httputils/v3/pkg/logger"
-	"github.com/ViBiOh/httputils/v3/pkg/model"
 	"github.com/ViBiOh/httputils/v3/pkg/owasp"
 	"github.com/ViBiOh/httputils/v3/pkg/prometheus"
 	"github.com/ViBiOh/mailer/pkg/client"
@@ -40,8 +39,5 @@ func main() {
 
 	go apiApp.Start()
 
-	httputils.New(serverConfig).ListenAndServe(apiApp.Handler(), []model.Middleware{
-		prometheus.New(prometheusConfig).Middleware,
-		owasp.New(owaspConfig).Middleware,
-	})
+	httputils.New(serverConfig).ListenAndServe(apiApp.Handler(), nil, prometheus.New(prometheusConfig).Middleware, owasp.New(owaspConfig).Middleware)
 }
