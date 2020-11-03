@@ -5,12 +5,12 @@ EXPOSE 1080
 RUN apk --update add bash coreutils ca-certificates \
  && rm -rf /var/cache/apk/*
 
-HEALTHCHECK --retries=10 CMD [ "/deploy", "-url", "http://localhost:1080/health" ]
-ENTRYPOINT [ "/deploy" ]
+HEALTHCHECK --retries=10 CMD [ "/app", "-url", "http://localhost:1080/health" ]
+ENTRYPOINT [ "/app" ]
 
 ARG APP_VERSION
 ENV VERSION=${APP_VERSION}
 
-COPY --from=builder /app/bin/deploy /
+COPY bin/deploy /app
 COPY deploy /deploy
 COPY clean /clean
