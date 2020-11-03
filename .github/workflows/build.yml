@@ -36,7 +36,7 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
       - run: |
-          docker build "APP_VERSION=$(make version)" -t "${{ secrets.DOCKER_USER }}/$(make name):$(make version)" .
+          docker build --build-arg "APP_VERSION=$(make version)" -t "${{ secrets.DOCKER_USER }}/$(make name):$(make version)" .
           docker push "${{ secrets.DOCKER_USER }}/$(make name):$(make version)"
       - uses: codecov/codecov-action@v1
 
