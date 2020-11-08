@@ -86,6 +86,8 @@ Usage of deploy:
         [http] Healthy HTTP Status code {DEPLOY_OK_STATUS} (default 204)
   -port uint
         [http] Listen port {DEPLOY_PORT} (default 1080)
+  -prometheusIgnore string
+        [prometheus] Ignored path prefixes for metrics, comma separated {DEPLOY_PROMETHEUS_IGNORE}
   -prometheusPath string
         [prometheus] Path for exposing metrics {DEPLOY_PROMETHEUS_PATH} (default "/metrics")
   -readTimeout string
