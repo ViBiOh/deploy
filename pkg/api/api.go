@@ -36,12 +36,12 @@ type Config struct {
 }
 
 type app struct {
+	mailerApp     client.App
+	annotationApp annotation.App
+
 	tempFolder        string
 	notification      string
 	notificationEmail string
-
-	mailerApp     client.App
-	annotationApp annotation.App
 }
 
 // Flags adds flags for configuring package
