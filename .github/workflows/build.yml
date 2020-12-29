@@ -19,6 +19,7 @@ defaults:
 jobs:
   build:
     name: Golang
+    if: "! contains(toJSON(github.event.commits.*.message), '[skip-ci]')"
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -42,9 +43,9 @@ jobs:
 
   publish:
     name: Publish
+    if: github.event_name == 'push' && github.ref == 'refs/heads/master' && !contains(toJSON(github.event.commits.*.message), '[skip-ci]')
     runs-on: ubuntu-latest
     needs: build
-    if: ${{ github.event_name == 'push' && github.ref == 'refs/heads/master' }}
     steps:
       - uses: actions/checkout@v2
       - name: Publish
