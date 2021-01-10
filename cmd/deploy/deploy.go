@@ -13,6 +13,7 @@ import (
 	"github.com/ViBiOh/httputils/v3/pkg/owasp"
 	"github.com/ViBiOh/httputils/v3/pkg/prometheus"
 	"github.com/ViBiOh/mailer/pkg/client"
+	mailer "github.com/ViBiOh/mailer/pkg/client"
 )
 
 func main() {
@@ -34,7 +35,10 @@ func main() {
 	logger.Global(logger.New(loggerConfig))
 	defer logger.Close()
 
-	mailerApp := client.New(mailerConfig)
+	mailerApp, err := mailer.New(mailerConfig)
+	logger.Fatal(err)
+	defer mailerApp.Close()
+
 	annotationApp := annotation.New(annotationConfig)
 	apiApp := api.New(apiConfig, mailerApp, annotationApp)
 
