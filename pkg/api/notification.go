@@ -6,7 +6,7 @@ import (
 	"regexp"
 	"strings"
 
-	"github.com/ViBiOh/mailer/pkg/client"
+	mailerModel "github.com/ViBiOh/mailer/pkg/model"
 )
 
 type outputLine struct {
@@ -70,5 +70,5 @@ func (a app) sendEmailNotification(ctx context.Context, project string, output [
 
 	recipients := []string{a.notificationEmail}
 
-	return client.NewEmail().From("deploy@vibioh.fr").As("Deploy").WithSubject(fmt.Sprintf("[deploy] Deploy of %s", project)).Data(notificationContent).To(recipients...).Send(ctx, a.mailerApp)
+	return a.mailerApp.Send(ctx, *mailerModel.NewMailRequest().From("deploy@vibioh.fr").As("Deploy").WithSubject(fmt.Sprintf("[deploy] Deploy of %s", project)).Data(notificationContent).To(recipients...))
 }
