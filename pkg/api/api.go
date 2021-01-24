@@ -24,7 +24,7 @@ import (
 
 // App of package
 type App interface {
-	Start()
+	Start(<-chan struct{})
 	Handler() http.Handler
 }
 
@@ -75,8 +75,10 @@ func validateRequest(r *http.Request) (project string, err error) {
 	return
 }
 
-func (a app) Start() {
-	cron.New().Days().At("06:00").In("Europe/Paris").Start(func(_ time.Time) error {
+func (a app) Start(done <-chan struct{}) {
+	cron.New().Days().At("06:00").In("Europe/Paris").OnError(func(err error) {
+		logger.Error("%s", err)
+	}).Start(func(_ time.Time) error {
 		cmd := exec.Command("./clean")
 
 		var out bytes.Buffer
@@ -87,9 +89,7 @@ func (a app) Start() {
 		logger.Info("%s", out.Bytes())
 
 		return err
-	}, func(err error) {
-		logger.Error("%s", err)
-	})
+	}, done)
 }
 
 // Handler for request. Should be use with net/http

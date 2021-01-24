@@ -42,7 +42,8 @@ func main() {
 	annotationApp := annotation.New(annotationConfig)
 	apiApp := api.New(apiConfig, mailerApp, annotationApp)
 
-	go apiApp.Start()
+	server := httputils.New(serverConfig)
+	go apiApp.Start(server.GetDone())
 
-	httputils.New(serverConfig).ListenAndServe(apiApp.Handler(), nil, prometheus.New(prometheusConfig).Middleware, owasp.New(owaspConfig).Middleware)
+	server.ListenAndServe(apiApp.Handler(), nil, prometheus.New(prometheusConfig).Middleware, owasp.New(owaspConfig).Middleware)
 }
