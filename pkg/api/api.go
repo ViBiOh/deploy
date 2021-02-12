@@ -132,19 +132,24 @@ func (a app) Handler() http.Handler {
 		}
 
 		output := out.Bytes()
-		success := err == nil
 		logger.Info("%s", output)
 
-		if err := a.sendEmailNotification(context.Background(), project, output, success); err != nil {
-			logger.Error("%s", err)
-		}
-
-		if err := a.sendAnnotation(context.Background(), project, success); err != nil {
-			logger.Error("%s", err)
-		}
+		a.notify(project, output, err)
 
 		if _, err := w.Write(output); err != nil {
 			httperror.InternalServerError(w, err)
 		}
 	})
+}
+
+func (a app) notify(project string, output []byte, err error) {
+	success := err == nil
+
+	if err := a.sendEmailNotification(context.Background(), project, output, success); err != nil {
+		logger.Error("%s", err)
+	}
+
+	if err := a.sendAnnotation(context.Background(), project, success); err != nil {
+		logger.Error("%s", err)
+	}
 }
