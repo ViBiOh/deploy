@@ -39,7 +39,7 @@ If something goes wrong during the deploy process, the uploaded `docker-compose.
 ```bash
 Usage of deploy:
   -address string
-        [http] Listen address {DEPLOY_ADDRESS}
+        [server] Listen address {DEPLOY_ADDRESS}
   -annotationPass string
         [annotation] Pass {DEPLOY_ANNOTATION_PASS}
   -annotationURL string
@@ -53,7 +53,7 @@ Usage of deploy:
   -apiTempFolder string
         [api] Temp folder for uploading files {DEPLOY_API_TEMP_FOLDER} (default "/tmp")
   -cert string
-        [http] Certificate file {DEPLOY_CERT}
+        [server] Certificate file {DEPLOY_CERT}
   -csp string
         [owasp] Content-Security-Policy {DEPLOY_CSP} (default "default-src 'self'; base-uri 'self'")
   -frameOptions string
@@ -63,9 +63,9 @@ Usage of deploy:
   -hsts
         [owasp] Indicate Strict Transport Security {DEPLOY_HSTS} (default true)
   -idleTimeout string
-        [http] Idle Timeout {DEPLOY_IDLE_TIMEOUT} (default "2m")
+        [server] Idle Timeout {DEPLOY_IDLE_TIMEOUT} (default "2m")
   -key string
-        [http] Key file {DEPLOY_KEY}
+        [server] Key file {DEPLOY_KEY}
   -loggerJson
         [logger] Log format as JSON {DEPLOY_LOGGER_JSON}
   -loggerLevel string
@@ -76,30 +76,44 @@ Usage of deploy:
         [logger] Key for message in JSON {DEPLOY_LOGGER_MESSAGE_KEY} (default "message")
   -loggerTimeKey string
         [logger] Key for timestamp in JSON {DEPLOY_LOGGER_TIME_KEY} (default "time")
-  -mailerPass string
-        [mailer] Pass {DEPLOY_MAILER_PASS}
+  -mailerName string
+        [mailer] HTTP Username or AMQP Exchange name {DEPLOY_MAILER_NAME} (default "mailer")
+  -mailerPassword string
+        [mailer] HTTP Pass {DEPLOY_MAILER_PASSWORD}
   -mailerURL string
-        [mailer] URL (an instance of github.com/ViBiOh/mailer) {DEPLOY_MAILER_URL}
-  -mailerUser string
-        [mailer] User {DEPLOY_MAILER_USER}
+        [mailer] URL (https?:// or amqps?://) {DEPLOY_MAILER_URL}
   -okStatus int
         [http] Healthy HTTP Status code {DEPLOY_OK_STATUS} (default 204)
   -port uint
-        [http] Listen port {DEPLOY_PORT} (default 1080)
+        [server] Listen port {DEPLOY_PORT} (default 1080)
+  -prometheusAddress string
+        [prometheus] Listen address {DEPLOY_PROMETHEUS_ADDRESS}
+  -prometheusCert string
+        [prometheus] Certificate file {DEPLOY_PROMETHEUS_CERT}
+  -prometheusIdleTimeout string
+        [prometheus] Idle Timeout {DEPLOY_PROMETHEUS_IDLE_TIMEOUT} (default "10s")
   -prometheusIgnore string
         [prometheus] Ignored path prefixes for metrics, comma separated {DEPLOY_PROMETHEUS_IGNORE}
-  -prometheusPath string
-        [prometheus] Path for exposing metrics {DEPLOY_PROMETHEUS_PATH} (default "/metrics")
+  -prometheusKey string
+        [prometheus] Key file {DEPLOY_PROMETHEUS_KEY}
+  -prometheusPort uint
+        [prometheus] Listen port {DEPLOY_PROMETHEUS_PORT} (default 9090)
+  -prometheusReadTimeout string
+        [prometheus] Read Timeout {DEPLOY_PROMETHEUS_READ_TIMEOUT} (default "5s")
+  -prometheusShutdownTimeout string
+        [prometheus] Shutdown Timeout {DEPLOY_PROMETHEUS_SHUTDOWN_TIMEOUT} (default "5s")
+  -prometheusWriteTimeout string
+        [prometheus] Write Timeout {DEPLOY_PROMETHEUS_WRITE_TIMEOUT} (default "10s")
   -readTimeout string
-        [http] Read Timeout {DEPLOY_READ_TIMEOUT} (default "5s")
+        [server] Read Timeout {DEPLOY_READ_TIMEOUT} (default "5s")
   -shutdownTimeout string
-        [http] Shutdown Timeout {DEPLOY_SHUTDOWN_TIMEOUT} (default "10s")
+        [server] Shutdown Timeout {DEPLOY_SHUTDOWN_TIMEOUT} (default "10s")
   -url string
         [alcotest] URL to check {DEPLOY_URL}
   -userAgent string
         [alcotest] User-Agent for check {DEPLOY_USER_AGENT} (default "Alcotest")
   -writeTimeout string
-        [http] Write Timeout {DEPLOY_WRITE_TIMEOUT} (default "2m")
+        [server] Write Timeout {DEPLOY_WRITE_TIMEOUT} (default "2m")
 ```
 
 ## License
