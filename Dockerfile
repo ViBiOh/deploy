@@ -1,4 +1,4 @@
-FROM docker/compose:1.28.4
+FROM docker/compose:1.28.5
 
 EXPOSE 1080
 
