@@ -7,6 +7,8 @@ github.com/Shopify/sarama v1.19.0/go.mod h1:FVkBWblsNy7DGZRfXLU0O9RCGt5g3g3yEuWX
 github.com/Shopify/toxiproxy v2.1.4+incompatible/go.mod h1:OXgGpZ6Cli1/URJOF1DMxUHB2q5Ap20/P/eIdh4G0pI=
 github.com/ViBiOh/httputils/v4 v4.3.0 h1:4Az+w8qipdzNA3Jdeg4UAqU4Io7q7BPa821kVvtsrqw=
 github.com/ViBiOh/httputils/v4 v4.3.0/go.mod h1:+mwW3YVDPI9y1Fx1ZXbehJPqWDFtlDLsNL5otGeBSBw=
+github.com/ViBiOh/httputils/v4 v4.3.1 h1:500gWKB924fNBl1DBDlhPRwzlrWySxhID2SDz71d884=
+github.com/ViBiOh/httputils/v4 v4.3.1/go.mod h1:DUg0oCVHtfKLLBrBYsH32p2t1jCWEohrtJReAvSnsok=
 github.com/ViBiOh/mailer v1.16.1 h1:v1D3cHda1tYZ6BMGtzwRKfBijfUp0B3UBDWvnem/fLY=
 github.com/ViBiOh/mailer v1.16.1/go.mod h1:OQLes6l3yYUaa6ztnB/yAIsHCqysoir+VW99npVFHPI=
 github.com/VividCortex/gohistogram v1.0.0/go.mod h1:Pf5mBqqDxYaXu3hDrrU+w6nw50o/4+TcAqDqk/vUH7g=
@@ -154,6 +156,7 @@ github.com/kr/pretty v0.1.0/go.mod h1:dAy3ld7l9f0ibDNOQOHHMYYIIbhfbHSm3C4ZsoJORN
 github.com/kr/pty v1.1.1/go.mod h1:pFQYn66WHrOpPYNljwOMqo10TkYh1fy3cYio2l3bCsQ=
 github.com/kr/text v0.1.0/go.mod h1:4Jbv+DJW3UT/LiOwJeYQe1efqtUx/iVham/4vfdArNI=
 github.com/lib/pq v1.9.0/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
+github.com/lib/pq v1.10.0/go.mod h1:AlVN5x4E4T544tWzH6hKfbfQvm3HdbOxrmggDNAPY9o=
 github.com/lightstep/lightstep-tracer-common/golang/gogo v0.0.0-20190605223551-bc2310a04743/go.mod h1:qklhhLq1aX+mtWk9cPHPzaBjWImj5ULL6C7HFJtXQMM=
 github.com/lightstep/lightstep-tracer-go v0.18.1/go.mod h1:jlF1pusYV4pidLvZ+XD0UBX0ZE6WURAspgAczcDHrL4=
 github.com/lyft/protoc-gen-validate v0.0.13/go.mod h1:XbGvPuh87YZc5TdIa2/I4pLk0QoUACkjt2znoq26NVQ=
