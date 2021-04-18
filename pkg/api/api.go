@@ -12,7 +12,6 @@ import (
 	"os/exec"
 	"path"
 	"strings"
-	"time"
 
 	"github.com/ViBiOh/deploy/pkg/annotation"
 	"github.com/ViBiOh/httputils/v4/pkg/cron"
@@ -78,7 +77,7 @@ func validateRequest(r *http.Request) (project string, err error) {
 func (a app) Start(done <-chan struct{}) {
 	cron.New().Days().At("06:00").In("Europe/Paris").OnError(func(err error) {
 		logger.Error("%s", err)
-	}).Start(func(_ time.Time) error {
+	}).Start(func(_ context.Context) error {
 		cmd := exec.Command("./clean")
 
 		var out bytes.Buffer
