@@ -44,6 +44,10 @@ jobs:
           username: ${{ secrets.DOCKER_USER }}
           password: ${{ secrets.DOCKER_PASS }}
       - name: Docker
+        if: env.DOCKER_USER && env.DOCKER_PASS
+        env:
+          DOCKER_USER: ${{ secrets.DOCKER_USER }}
+          DOCKER_PASS: ${{ secrets.DOCKER_PASS }}
         run: |
           docker build --build-arg "APP_VERSION=$(make version)" -t "${{ secrets.DOCKER_USER }}/$(make name):$(make version)" .
       - name: Docker push
