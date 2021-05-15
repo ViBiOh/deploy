@@ -104,7 +104,7 @@ func copyEmbedScript(source, name string) error {
 }
 
 func (a app) Start(done <-chan struct{}) {
-	for _, script := range []string{"clean", "deploy"} {
+	for _, script := range []string{"clean", "deploy-compose"} {
 		if err := copyEmbedScript("scripts", script); err != nil {
 			logger.Error("unable to copy embed `%s` script: %s", script, err)
 		}
@@ -152,7 +152,7 @@ func (a app) Handler() http.Handler {
 			return
 		}
 
-		cmd := exec.Command("./deploy", project, composeFilename)
+		cmd := exec.Command("./deploy-compose", project, composeFilename)
 
 		var out bytes.Buffer
 		cmd.Stdout = &out
