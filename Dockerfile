@@ -12,5 +12,3 @@ ARG APP_VERSION
 ENV VERSION=${APP_VERSION}
 
 COPY bin/deploy /app
-COPY deploy /deploy
-COPY clean /clean
