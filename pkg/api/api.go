@@ -3,6 +3,7 @@ package api
 import (
 	"bytes"
 	"context"
+	"embed"
 	"errors"
 	"flag"
 	"fmt"
@@ -20,6 +21,9 @@ import (
 	"github.com/ViBiOh/httputils/v4/pkg/logger"
 	"github.com/ViBiOh/mailer/pkg/client"
 )
+
+//go:embed scripts
+var scripts embed.FS
 
 // App of package
 type App interface {
@@ -74,7 +78,38 @@ func validateRequest(r *http.Request) (project string, err error) {
 	return
 }
 
+func copyEmbedScript(source, name string) error {
+	destinationFile, err := os.OpenFile(name, os.O_CREATE|os.O_TRUNC|os.O_RDWR, 0700)
+	if err != nil {
+		return fmt.Errorf("unable to open destination file: %s", err)
+	}
+	defer func() {
+		if err := destinationFile.Close(); err != nil {
+			logger.Error("error while closing destination file: %s", err)
+		}
+	}()
+
+	sourceFile, err := scripts.Open(path.Join(source, name))
+	if err != nil {
+		return fmt.Errorf("unable to open source file: %s", err)
+	}
+	defer func() {
+		if err := sourceFile.Close(); err != nil {
+			logger.Error("error while closing source file: %s", err)
+		}
+	}()
+
+	_, err = io.Copy(destinationFile, sourceFile)
+	return err
+}
+
 func (a app) Start(done <-chan struct{}) {
+	for _, script := range []string{"clean", "deploy"} {
+		if err := copyEmbedScript("scripts", script); err != nil {
+			logger.Error("unable to copy embed `%s` script: %s", script, err)
+		}
+	}
+
 	cron.New().Days().At("06:00").In("Europe/Paris").OnError(func(err error) {
 		logger.Error("%s", err)
 	}).Start(func(_ context.Context) error {

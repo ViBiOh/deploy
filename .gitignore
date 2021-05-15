@@ -1,5 +1,7 @@
 # scripts
-scripts/
+/scripts/
+/clean
+/deploy
 
 .env
 

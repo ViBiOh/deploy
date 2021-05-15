@@ -13,6 +13,7 @@ import (
 	"github.com/ViBiOh/httputils/v4/pkg/logger"
 	"github.com/ViBiOh/httputils/v4/pkg/owasp"
 	"github.com/ViBiOh/httputils/v4/pkg/prometheus"
+	"github.com/ViBiOh/httputils/v4/pkg/recoverer"
 	"github.com/ViBiOh/httputils/v4/pkg/server"
 	"github.com/ViBiOh/mailer/pkg/client"
 	mailer "github.com/ViBiOh/mailer/pkg/client"
@@ -55,7 +56,7 @@ func main() {
 	go apiApp.Start(healthApp.Done())
 
 	go promServer.Start("prometheus", healthApp.End(), prometheusApp.Handler())
-	go appServer.Start("http", healthApp.End(), httputils.Handler(apiApp.Handler(), healthApp, prometheusApp.Middleware, owasp.New(owaspConfig).Middleware))
+	go appServer.Start("http", healthApp.End(), httputils.Handler(apiApp.Handler(), healthApp, recoverer.Middleware, prometheusApp.Middleware, owasp.New(owaspConfig).Middleware))
 
 	healthApp.WaitForTermination(appServer.Done())
 	server.GracefulWait(appServer.Done(), promServer.Done())
