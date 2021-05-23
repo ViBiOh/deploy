@@ -8,7 +8,7 @@
 docker-compose deploy API
 
 ```bash
-curl -O https://raw.githubusercontent.com/ViBiOh/deploy/main/deploy
+curl -O https://raw.githubusercontent.com/ViBiOh/deploy/main/pkg/api/scripts/deploy-compose
 chmod +x deploy
 
 ./deploy PROJECT_NAME DOCKER-COMPOSE-FILE
