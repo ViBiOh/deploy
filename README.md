@@ -84,11 +84,13 @@ Usage of deploy:
   -okStatus int
         [http] Healthy HTTP Status code {DEPLOY_OK_STATUS} (default 204)
   -port uint
-        [server] Listen port {DEPLOY_PORT} (default 1080)
+        [server] Listen port (0 to disable) {DEPLOY_PORT} (default 1080)
   -prometheusAddress string
         [prometheus] Listen address {DEPLOY_PROMETHEUS_ADDRESS}
   -prometheusCert string
         [prometheus] Certificate file {DEPLOY_PROMETHEUS_CERT}
+  -prometheusGzip
+        [prometheus] Enable gzip compression of metrics output {DEPLOY_PROMETHEUS_GZIP}
   -prometheusIdleTimeout string
         [prometheus] Idle Timeout {DEPLOY_PROMETHEUS_IDLE_TIMEOUT} (default "10s")
   -prometheusIgnore string
@@ -96,7 +98,7 @@ Usage of deploy:
   -prometheusKey string
         [prometheus] Key file {DEPLOY_PROMETHEUS_KEY}
   -prometheusPort uint
-        [prometheus] Listen port {DEPLOY_PROMETHEUS_PORT} (default 9090)
+        [prometheus] Listen port (0 to disable) {DEPLOY_PROMETHEUS_PORT} (default 9090)
   -prometheusReadTimeout string
         [prometheus] Read Timeout {DEPLOY_PROMETHEUS_READ_TIMEOUT} (default "5s")
   -prometheusShutdownTimeout string
