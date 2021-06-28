@@ -18,7 +18,7 @@ chmod +x deploy
 Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]
   where
     - PROJECT_NAME         Name of your compose project
-    - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yml in current dir)
+    - DOCKER_COMPOSE_FILE  Path to your compose file (default: docker-compose.yaml in current dir)
 ```
 
 ## Golang API
@@ -26,12 +26,12 @@ Usage: deploy [PROJECT_NAME] [DOCKER-COMPOSE-FILE]
 You can execute the `deploy` script through HTTP API.
 
 ```bash
-curl -X POST http://localhost:1080/[project_name]/ --data-binary @docker-compose.yml
+curl -X POST http://localhost:1080/[project_name]/ --data-binary @docker-compose.yaml
 ```
 
 We recommend putting an `Authorization` in front of your server (e.g. reverse-proxy, nginx, etc) if you plan to expose it to the internet.
 
-If something goes wrong during the deploy process, the uploaded `docker-compose.yml` is kept in order to manually retry or debug what's going on. Otherwise, the file is deleted.
+If something goes wrong during the deploy process, the uploaded `docker-compose.yaml` is kept in order to manually retry or debug what's going on. Otherwise, the file is deleted.
 
 ### CLI of HTTP Server
 

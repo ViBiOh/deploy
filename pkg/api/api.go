@@ -140,7 +140,7 @@ func (a app) Handler() http.Handler {
 			return
 		}
 
-		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s.yml", project))
+		composeFilename := path.Join(a.tempFolder, fmt.Sprintf("docker-compose-%s.yaml", project))
 		uploadFile, err := os.Create(composeFilename)
 		if err != nil {
 			httperror.InternalServerError(w, err)

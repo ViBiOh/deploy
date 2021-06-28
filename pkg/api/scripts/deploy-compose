@@ -15,7 +15,7 @@ deploy() {
   fi
 
   local PROJECT_NAME="${1}"
-  local COMPOSE_FILE="${2:-docker-compose.yml}"
+  local COMPOSE_FILE="${2:-docker-compose.yaml}"
 
   printf "%bStarting services of %s%b\n" "${BLUE}" "${PROJECT_NAME}" "${RESET}"
 
