@@ -2,7 +2,6 @@
 
 [![Build](https://github.com/ViBiOh/deploy/workflows/Build/badge.svg)](https://github.com/ViBiOh/deploy/actions)
 [![codecov](https://codecov.io/gh/ViBiOh/deploy/branch/main/graph/badge.svg)](https://codecov.io/gh/ViBiOh/deploy)
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=shield)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_shield)
 [![Quality Gate Status](https://sonarcloud.io/api/project_badges/measure?project=ViBiOh_deploy&metric=alert_status)](https://sonarcloud.io/dashboard?id=ViBiOh_deploy)
 
 docker-compose deploy API
@@ -116,7 +115,3 @@ Usage of deploy:
   -writeTimeout string
         [server] Write Timeout {DEPLOY_WRITE_TIMEOUT} (default "2m")
 ```
-
-## License
-
-[![FOSSA Status](https://app.fossa.io/api/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy.svg?type=large)](https://app.fossa.io/projects/git%2Bgithub.com%2FViBiOh%2Fdeploy?ref=badge_large)
