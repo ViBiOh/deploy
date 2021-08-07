@@ -32,7 +32,11 @@ We recommend putting an `Authorization` in front of your server (e.g. reverse-pr
 
 If something goes wrong during the deploy process, the uploaded `docker-compose.yaml` is kept in order to manually retry or debug what's going on. Otherwise, the file is deleted.
 
-### CLI of HTTP Server
+## Usage
+
+The application can be configured by passing CLI args described below or their equivalent as environment variable. CLI values take precedence over environments variables.
+
+Be careful when using the CLI values, if someone list the processes on the system, they will appear in plain-text. Pass secrets by environment variables: it's less easily visible.
 
 ```bash
 Usage of deploy:
