@@ -10,8 +10,10 @@ import (
 )
 
 // App of package
-type App interface {
-	Send(context.Context, string, ...string) error
+type App struct {
+	url  string
+	user string
+	pass string
 }
 
 // Config of package
@@ -19,12 +21,6 @@ type Config struct {
 	url  *string
 	user *string
 	pass *string
-}
-
-type app struct {
-	url  string
-	user string
-	pass string
 }
 
 type annotationPayload struct {
@@ -46,21 +42,23 @@ func New(config Config) App {
 	url := strings.TrimSpace(*config.url)
 
 	if url == "" {
-		return &app{}
+		return App{}
 	}
 
-	return &app{
+	return App{
 		url:  strings.TrimSpace(*config.url),
 		user: strings.TrimSpace(*config.user),
 		pass: strings.TrimSpace(*config.pass),
 	}
 }
 
-func (a app) Enabled() bool {
+// Enabled check requirements are met
+func (a App) Enabled() bool {
 	return a.url != ""
 }
 
-func (a app) Send(ctx context.Context, text string, tags ...string) error {
+// Send Grafana annotation
+func (a App) Send(ctx context.Context, text string, tags ...string) error {
 	if !a.Enabled() {
 		return nil
 	}

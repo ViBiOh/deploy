@@ -26,9 +26,13 @@ import (
 var scripts embed.FS
 
 // App of package
-type App interface {
-	Start(<-chan struct{})
-	Handler() http.Handler
+type App struct {
+	mailerApp     client.App
+	annotationApp annotation.App
+
+	tempFolder        string
+	notification      string
+	notificationEmail string
 }
 
 // Config of package
@@ -36,15 +40,6 @@ type Config struct {
 	tempFolder        *string
 	notification      *string
 	notificationEmail *string
-}
-
-type app struct {
-	mailerApp     client.App
-	annotationApp annotation.App
-
-	tempFolder        string
-	notification      string
-	notificationEmail string
 }
 
 // Flags adds flags for configuring package
@@ -58,7 +53,7 @@ func Flags(fs *flag.FlagSet, prefix string) Config {
 
 // New creates new App from Config
 func New(config Config, mailerApp client.App, annotationApp annotation.App) App {
-	return &app{
+	return App{
 		tempFolder:        strings.TrimSpace(*config.tempFolder),
 		notification:      strings.TrimSpace(*config.notification),
 		notificationEmail: strings.TrimSpace(*config.notificationEmail),
@@ -103,7 +98,8 @@ func copyEmbedScript(source, name string) error {
 	return err
 }
 
-func (a app) Start(done <-chan struct{}) {
+// Start worker
+func (a App) Start(done <-chan struct{}) {
 	for _, script := range []string{"clean", "deploy-compose"} {
 		if err := copyEmbedScript("scripts", script); err != nil {
 			logger.Error("unable to copy embed `%s` script: %s", script, err)
@@ -127,7 +123,7 @@ func (a app) Start(done <-chan struct{}) {
 }
 
 // Handler for request. Should be use with net/http
-func (a app) Handler() http.Handler {
+func (a App) Handler() http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.Method != http.MethodPost {
 			w.WriteHeader(http.StatusMethodNotAllowed)
@@ -176,7 +172,7 @@ func (a app) Handler() http.Handler {
 	})
 }
 
-func (a app) notify(project string, output []byte, err error) {
+func (a App) notify(project string, output []byte, err error) {
 	success := err == nil
 
 	if err := a.sendEmailNotification(context.Background(), project, output, success); err != nil {

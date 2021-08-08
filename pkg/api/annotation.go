@@ -5,7 +5,7 @@ import (
 	"fmt"
 )
 
-func (a app) sendAnnotation(ctx context.Context, project string, success bool) error {
+func (a App) sendAnnotation(ctx context.Context, project string, success bool) error {
 	text := fmt.Sprintf("Deploy of %s", project)
 	if success {
 		text += " successful"
