@@ -65,7 +65,7 @@ func (a App) Send(ctx context.Context, text string, tags ...string) error {
 
 	req := request.New().Post(a.url)
 	if a.pass != "" {
-		req.BasicAuth(a.user, a.pass)
+		req = req.BasicAuth(a.user, a.pass)
 	}
 
 	_, err := req.JSON(ctx, annotationPayload{
