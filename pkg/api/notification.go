@@ -70,5 +70,5 @@ func (a App) sendEmailNotification(ctx context.Context, project string, output [
 
 	recipients := []string{a.notificationEmail}
 
-	return a.mailerApp.Send(ctx, *mailerModel.NewMailRequest().From("deploy@vibioh.fr").As("Deploy").WithSubject(fmt.Sprintf("[deploy] Deploy of %s", project)).Data(notificationContent).To(recipients...))
+	return a.mailerApp.Send(ctx, mailerModel.NewMailRequest().From("deploy@vibioh.fr").As("Deploy").WithSubject(fmt.Sprintf("[deploy] Deploy of %s", project)).Data(notificationContent).To(recipients...))
 }
