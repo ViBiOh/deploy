@@ -45,9 +45,9 @@ type Config struct {
 // Flags adds flags for configuring package
 func Flags(fs *flag.FlagSet, prefix string) Config {
 	return Config{
-		tempFolder:        flags.New(prefix, "deploy").Name("TempFolder").Default("/tmp").Label("Temp folder for uploading files").ToString(fs),
-		notification:      flags.New(prefix, "deploy").Name("Notification").Default("onError").Label("Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')").ToString(fs),
-		notificationEmail: flags.New(prefix, "deploy").Name("NotificationEmail").Default("").Label("Email address to notify").ToString(fs),
+		tempFolder:        flags.New(prefix, "deploy", "TempFolder").Default("/tmp", nil).Label("Temp folder for uploading files").ToString(fs),
+		notification:      flags.New(prefix, "deploy", "Notification").Default("onError", nil).Label("Email notificiation when deploy ends (possibles values ares 'never', 'onError', 'all')").ToString(fs),
+		notificationEmail: flags.New(prefix, "deploy", "NotificationEmail").Default("", nil).Label("Email address to notify").ToString(fs),
 	}
 }
 
