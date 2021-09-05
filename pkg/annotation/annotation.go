@@ -11,9 +11,7 @@ import (
 
 // App of package
 type App struct {
-	url  string
-	user string
-	pass string
+	req request.Request
 }
 
 // Config of package
@@ -39,22 +37,14 @@ func Flags(fs *flag.FlagSet, prefix string) Config {
 
 // New creates new App from Config
 func New(config Config) App {
-	url := strings.TrimSpace(*config.url)
-
-	if url == "" {
-		return App{}
-	}
-
 	return App{
-		url:  strings.TrimSpace(*config.url),
-		user: strings.TrimSpace(*config.user),
-		pass: strings.TrimSpace(*config.pass),
+		req: request.New().Post(strings.TrimSpace(*config.url)).BasicAuth(strings.TrimSpace(*config.user), *config.pass),
 	}
 }
 
 // Enabled check requirements are met
 func (a App) Enabled() bool {
-	return a.url != ""
+	return !a.req.IsZero()
 }
 
 // Send Grafana annotation
@@ -63,12 +53,7 @@ func (a App) Send(ctx context.Context, text string, tags ...string) error {
 		return nil
 	}
 
-	req := request.New().Post(a.url)
-	if a.pass != "" {
-		req = req.BasicAuth(a.user, a.pass)
-	}
-
-	_, err := req.JSON(ctx, annotationPayload{
+	_, err := a.req.JSON(ctx, annotationPayload{
 		Text: text,
 		Tags: tags,
 	})
