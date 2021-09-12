@@ -3,7 +3,7 @@ module github.com/ViBiOh/deploy
 go 1.17
 
 require (
-	github.com/ViBiOh/httputils/v4 v4.22.4
+	github.com/ViBiOh/httputils/v4 v4.23.1
 	github.com/ViBiOh/mailer v1.24.3
 )
 
